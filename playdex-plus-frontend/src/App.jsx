@@ -10,11 +10,10 @@ function App() {
     <>
       <div>
         <h1 class="text-3xl underline font-bold text-green-500 flex items-center justify-center h-screen">
-          Hello world!
+          Home Page
         </h1>
       </div>
     </>
   );
 }
-
 export default App;
