@@ -6,14 +6,24 @@ import GlobalApi from "../Services/GlobalApi";
 
 function Home() {
   const [allGamesList, setAllGamesList] = useState([]); // to store list of all games
+  const [gamesListbyGenres, setGamesListbyGenres] = useState([]); // store list of games filtered by genre
 
   useEffect(() => {
     getAllGamesList(); // fetch all games
+    getGameListbyGenreId();
   }, []);
 
   const getAllGamesList = () => {
     GlobalApi.getAllGames().then((resp) => {
       console.log(resp.data.results);
+      setGamesListbyGenres(resp.data.results);
+    });
+  };
+
+  // Function to fetch games by genre ID and update gamesListbyGenres
+  const getGameListbyGenreId = (id) => {
+    GlobalApi.getGamesbyGenreID(4).then((resp) => {
+      console.log("Games By Genre:", resp.data.results);
     });
   };
 
@@ -23,7 +33,7 @@ function Home() {
         <GenreList />
       </div>
       <div className="w-3/4">
-        <GameList />
+        <GameList gameList={gamesListbyGenres} />
       </div>
     </div>
   );

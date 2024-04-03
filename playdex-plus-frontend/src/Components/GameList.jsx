@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 
-function GameList() {
+function GameList({ gameList }) {
+  useEffect(() => {
+    console.log("GameList:", gameList);
+  });
   return <div>GameList Component</div>;
 }
 
