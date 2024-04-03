@@ -5,11 +5,11 @@ import GameList from "../Components/GameList";
 function Home() {
   const [games, setGames] = useState([]);
 
-  useEffect(() => {
-    GlobalApi.getAllGames().then((fetchedGames) => {
-      setGames(fetchedGames);
-    });
-  }, []);
+  // useEffect(() => {
+  //   GlobalApi.getAllGames().then((fetchedGames) => {
+  //     setGames(fetchedGames);
+  //   });
+  // }, []);
 
   return (
     <div className="flex">

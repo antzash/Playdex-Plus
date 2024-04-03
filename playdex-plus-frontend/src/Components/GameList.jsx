@@ -1,7 +1,6 @@
 import React from "react";
 
-function GameList({ games }) {
-  console.log(games); // Logs the games passed as props
+function GameList() {
   return <div>Game List Component</div>;
 }
 
