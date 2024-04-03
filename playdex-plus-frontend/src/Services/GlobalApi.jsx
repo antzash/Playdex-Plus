@@ -7,10 +7,19 @@ const axiosCreate = axios.create({
 });
 
 const getAllGames = async () => {
-  const response = await axiosCreate.get(`games?key=${key}`);
-  const games = response.data.results;
-  console.log(games);
-  return games;
+  let allGames = [];
+
+  // Loop through 12 pages
+  for (let page = 1; page <= 12; page++) {
+    const response = await axiosCreate.get(
+      `games?key=${key}&page_size=40&page=${page}`
+    );
+    const games = response.data.results;
+    console.log(`Page ${page}:`, games);
+    allGames = [...allGames, ...games];
+  }
+
+  return allGames;
 };
 
 export default { getAllGames };
