@@ -1,14 +1,21 @@
 import React, { useEffect, useState } from "react";
-
-// Assuming you have a GameList component similar to GenreList
-
 import GlobalApi from "../Services/GlobalApi";
+import GameList from "../Components/GameList";
 
 function Home() {
+  const [games, setGames] = useState([]);
+
+  useEffect(() => {
+    GlobalApi.getAllGames().then((fetchedGames) => {
+      setGames(fetchedGames);
+    });
+  }, []);
+
   return (
     <div className="flex">
-      <div className="w-1/4"></div>
-      <div className="w-3/4"></div>
+      <div className="w-full">
+        <GameList games={games} />
+      </div>
     </div>
   );
 }

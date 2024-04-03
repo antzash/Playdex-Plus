@@ -6,4 +6,11 @@ const axiosCreate = axios.create({
   baseURL: "https://api.rawg.io/api/",
 });
 
-export default {};
+const getAllGames = async () => {
+  const response = await axiosCreate.get(`games?key=${key}`);
+  const games = response.data.results;
+  console.log(games);
+  return games;
+};
+
+export default { getAllGames };
