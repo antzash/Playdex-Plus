@@ -1,9 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import GenreList from "../Components/GenreList";
 // Assuming you have a GameList component similar to GenreList
 import GameList from "../Components/GameList";
+import GlobalApi from "../Services/GlobalApi";
 
-const Home = () => {
+function Home() {
+  const [allGamesList, setAllGamesList] = useState([]); // to store list of all games
+
+  useEffect(() => {
+    getAllGamesList(); // fetch all games
+  }, []);
+
+  const getAllGamesList = () => {
+    GlobalApi.getAllGames().then((resp) => {
+      console.log(resp.data.results);
+    });
+  };
+
   return (
     <div className="flex">
       <div className="w-1/4">
@@ -14,6 +27,6 @@ const Home = () => {
       </div>
     </div>
   );
-};
+}
 
 export default Home;
