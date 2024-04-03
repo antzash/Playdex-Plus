@@ -6,6 +6,8 @@ const axiosCreate = axios.create({
   baseURL: "https://api.rawg.io/api/",
 });
 
+const getGenreList = axiosCreate.get("/genres?key=" + key);
+
 const getAllGames = async () => {
   try {
     const response = await axiosCreate.get(`games?key=${key}&page_size=40`);
@@ -16,4 +18,4 @@ const getAllGames = async () => {
   }
 };
 
-export default { getAllGames };
+export default { getAllGames, getGenreList };
