@@ -1,14 +1,17 @@
 import React from "react";
 import GenreList from "../Components/GenreList";
+// Assuming you have a GameList component similar to GenreList
+import GameList from "../Components/GameList";
 
 const Home = () => {
   return (
-    <div>
-      <div className="bg-red-400">
+    <div className="flex">
+      <div className="w-1/4">
         <GenreList />
       </div>
-      <br />
-      <div className="bg-violet-300"></div>
+      <div className="w-3/4">
+        <GameList />
+      </div>
     </div>
   );
 };
