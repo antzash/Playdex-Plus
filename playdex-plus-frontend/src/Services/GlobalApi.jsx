@@ -8,7 +8,7 @@ const axiosCreate = axios.create({
 
 const getAllGames = async () => {
   try {
-    const response = await axiosCreate.get(`games?key=${key}&page_size=30`);
+    const response = await axiosCreate.get(`games?key=${key}&page_size=40`);
     return response.data; // Return the data from the response
   } catch (error) {
     console.error("Error fetching games:", error);
