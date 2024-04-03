@@ -1,0 +1,223 @@
+game details sample:
+
+"id": 3498,
+    "slug": "grand-theft-auto-v",
+    "name": "Grand Theft Auto V",
+    "released": "2013-09-17",
+    "background_image": "https://media.rawg.io/media/games/20a/20aa03a10cda45239fe22d035c0ebe64.jpg",
+    "parent_platforms": [
+      {
+        "platform": {
+          "id": 1,
+          "name": "PC",
+          "slug": "pc"
+        }
+      },
+      {
+        "platform": {
+          "id": 2,
+          "name": "PlayStation",
+          "slug": "playstation"
+        }
+      },
+      {
+        "platform": {
+          "id": 3,
+          "name": "Xbox",
+          "slug": "xbox"
+        }
+      }
+    ],
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action",
+        "slug": "action",
+        "games_count": 178957,
+        "image_background": "https://media.rawg.io/media/games/b45/b45575f34285f2c4479c9a5f719d972e.jpg"
+      }
+    ],
+    "tags": [
+      {
+        "id": 31,
+        "name": "Singleplayer",
+        "slug": "singleplayer",
+        "language": "eng",
+        "games_count": 219672,
+        "image_background": "https://media.rawg.io/media/games/4be/4be6a6ad0364751a96229c56bf69be59.jpg"
+      },
+      {
+        "id": 40847,
+        "name": "Steam Achievements",
+        "slug": "steam-achievements",
+        "language": "eng",
+        "games_count": 36304,
+        "image_background": "https://media.rawg.io/media/games/46d/46d98e6910fbc0706e2948a7cc9b10c5.jpg"
+      },
+      {
+        "id": 7,
+        "name": "Multiplayer",
+        "slug": "multiplayer",
+        "language": "eng",
+        "games_count": 37382,
+        "image_background": "https://media.rawg.io/media/games/b8c/b8c243eaa0fbac8115e0cdccac3f91dc.jpg"
+      },
+      {
+        "id": 40836,
+        "name": "Full controller support",
+        "slug": "full-controller-support",
+        "language": "eng",
+        "games_count": 17080,
+        "image_background": "https://media.rawg.io/media/games/d58/d588947d4286e7b5e0e12e1bea7d9844.jpg"
+      },
+      {
+        "id": 13,
+        "name": "Atmospheric",
+        "slug": "atmospheric",
+        "language": "eng",
+        "games_count": 32370,
+        "image_background": "https://media.rawg.io/media/games/6cd/6cd653e0aaef5ff8bbd295bf4bcb12eb.jpg"
+      },
+      {
+        "id": 42,
+        "name": "Great Soundtrack",
+        "slug": "great-soundtrack",
+        "language": "eng",
+        "games_count": 3390,
+        "image_background": "https://media.rawg.io/media/games/da1/da1b267764d77221f07a4386b6548e5a.jpg"
+      },
+      {
+        "id": 24,
+        "name": "RPG",
+        "slug": "rpg",
+        "language": "eng",
+        "games_count": 20161,
+        "image_background": "https://media.rawg.io/media/games/995/9951d9d55323d08967640f7b9ab3e342.jpg"
+      },
+      {
+        "id": 18,
+        "name": "Co-op",
+        "slug": "co-op",
+        "language": "eng",
+        "games_count": 11219,
+        "image_background": "https://media.rawg.io/media/games/736/73619bd336c894d6941d926bfd563946.jpg"
+      },
+      {
+        "id": 36,
+        "name": "Open World",
+        "slug": "open-world",
+        "language": "eng",
+        "games_count": 7203,
+        "image_background": "https://media.rawg.io/media/games/960/960b601d9541cec776c5fa42a00bf6c4.jpg"
+      },
+      {
+        "id": 411,
+        "name": "cooperative",
+        "slug": "cooperative",
+        "language": "eng",
+        "games_count": 4778,
+        "image_background": "https://media.rawg.io/media/games/46d/46d98e6910fbc0706e2948a7cc9b10c5.jpg"
+      },
+      {
+        "id": 8,
+        "name": "First-Person",
+        "slug": "first-person",
+        "language": "eng",
+        "games_count": 30891,
+        "image_background": "https://media.rawg.io/media/games/34b/34b1f1850a1c06fd971bc6ab3ac0ce0e.jpg"
+      },
+      {
+        "id": 149,
+        "name": "Third Person",
+        "slug": "third-person",
+        "language": "eng",
+        "games_count": 11021,
+        "image_background": "https://media.rawg.io/media/games/490/49016e06ae2103881ff6373248843069.jpg"
+      },
+      {
+        "id": 4,
+        "name": "Funny",
+        "slug": "funny",
+        "language": "eng",
+        "games_count": 24337,
+        "image_background": "https://media.rawg.io/media/games/8cc/8cce7c0e99dcc43d66c8efd42f9d03e3.jpg"
+      },
+      {
+        "id": 37,
+        "name": "Sandbox",
+        "slug": "sandbox",
+        "language": "eng",
+        "games_count": 6684,
+        "image_background": "https://media.rawg.io/media/games/dd5/dd50d4266915d56dd5b63ae1bf72606a.jpg"
+      },
+      {
+        "id": 123,
+        "name": "Comedy",
+        "slug": "comedy",
+        "language": "eng",
+        "games_count": 12068,
+        "image_background": "https://media.rawg.io/media/games/530/5302dd22a190e664531236ca724e8726.jpg"
+      },
+      {
+        "id": 150,
+        "name": "Third-Person Shooter",
+        "slug": "third-person-shooter",
+        "language": "eng",
+        "games_count": 3308,
+        "image_background": "https://media.rawg.io/media/games/d82/d82990b9c67ba0d2d09d4e6fa88885a7.jpg"
+      },
+      {
+        "id": 62,
+        "name": "Moddable",
+        "slug": "moddable",
+        "language": "eng",
+        "games_count": 891,
+        "image_background": "https://media.rawg.io/media/games/20a/20aa03a10cda45239fe22d035c0ebe64.jpg"
+      },
+      {
+        "id": 144,
+        "name": "Crime",
+        "slug": "crime",
+        "language": "eng",
+        "games_count": 2750,
+        "image_background": "https://media.rawg.io/media/games/473/473bd9a5e9522629d6cb28b701fb836a.jpg"
+      },
+      {
+        "id": 62349,
+        "name": "vr mod",
+        "slug": "vr-mod",
+        "language": "eng",
+        "games_count": 17,
+        "image_background": "https://media.rawg.io/media/screenshots/1bb/1bb3f78f0fe43b5d5ca2f3da5b638840.jpg"
+      }
+    ],
+    "short_screenshots": [
+      {
+        "id": -1,
+        "image": "https://media.rawg.io/media/games/20a/20aa03a10cda45239fe22d035c0ebe64.jpg"
+      },
+      {
+        "id": 1827221,
+        "image": "https://media.rawg.io/media/screenshots/a7c/a7c43871a54bed6573a6a429451564ef.jpg"
+      },
+      {
+        "id": 1827222,
+        "image": "https://media.rawg.io/media/screenshots/cf4/cf4367daf6a1e33684bf19adb02d16d6.jpg"
+      },
+      {
+        "id": 1827223,
+        "image": "https://media.rawg.io/media/screenshots/f95/f9518b1d99210c0cae21fc09e95b4e31.jpg"
+      },
+      {
+        "id": 1827225,
+        "image": "https://media.rawg.io/media/screenshots/a5c/a5c95ea539c87d5f538763e16e18fb99.jpg"
+      },
+      {
+        "id": 1827226,
+        "image": "https://media.rawg.io/media/screenshots/a7e/a7e990bc574f4d34e03b5926361d1ee7.jpg"
+      },
+      {
+        "id": 1827227,
+        "image": "https://media.rawg.io/media/screenshots/592/592e2501d8734b802b2a34fee2df59fa.jpg"
+      }
+    ]

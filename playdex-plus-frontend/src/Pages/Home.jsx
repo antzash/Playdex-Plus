@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import GlobalApi from "../Services/GlobalApi";
+// import GlobalApi from "../Services/GlobalApi";
 import GameList from "../Components/GameList";
 
 function Home() {
-  const [games, setGames] = useState([]);
+  // const [games, setGames] = useState([]);
 
   // useEffect(() => {
   //   GlobalApi.getAllGames().then((fetchedGames) => {
@@ -14,7 +14,7 @@ function Home() {
   return (
     <div className="flex">
       <div className="w-full">
-        <GameList games={games} />
+        <GameList />
       </div>
     </div>
   );
