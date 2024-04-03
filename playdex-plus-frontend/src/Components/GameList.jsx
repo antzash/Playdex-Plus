@@ -8,8 +8,10 @@ export default function GameList() {
 
   const getGameList = () => {
     GlobalApi.getAllGames()
-      .then((resp) => {
-        console.log(resp.data.results);
+      .then((data) => {
+        if (data && data.results && data.results.length > 0) {
+          console.log(data.results); // Log the games to the console
+        }
       })
       .catch((error) => {
         console.error("Error fetching games:", error);
