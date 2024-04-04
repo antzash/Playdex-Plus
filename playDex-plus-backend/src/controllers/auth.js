@@ -9,7 +9,7 @@ const getAllUsers = async (req, res) => {
 
     const outputArray = [];
     for (const user of users) {
-      outputArray.push({ email: user.email, role: user.role });
+      outputArray.push({ username: user.username, role: user.role });
     }
 
     res.json(outputArray);
@@ -22,15 +22,20 @@ const getAllUsers = async (req, res) => {
 const register = async (req, res) => {
   try {
     //1. check duplicates:
-    const auth = await AuthModel.findOne({ email: req.body.email });
+    const auth = await AuthModel.findOne({ username: req.body.username });
     if (auth) {
-      return res.status(400).json({ status: "error", msg: "duplicate email" });
+      return res
+        .status(400)
+        .json({
+          status: "error",
+          msg: "username taken lol pls choose another",
+        });
     }
     //2. hash password:
     const hash = await bcrypt.hash(req.body.password, 12);
     //3. store
     await AuthModel.create({
-      email: req.body.email,
+      username: req.body.username,
       hash,
       role: req.body.role || "user",
     });
@@ -44,19 +49,19 @@ const register = async (req, res) => {
 const login = async (req, res) => {
   try {
     //1. get user:
-    const auth = await AuthModel.findOne({ email: req.body.email });
+    const auth = await AuthModel.findOne({ username: req.body.username });
     if (!auth) {
       return res.status(400).json({ status: "error", msg: "no authorized" });
     }
     //2.compare hash:
     const result = await bcrypt.compare(req.body.password, auth.hash);
     if (!result) {
-      console.error("email or password error");
+      console.error("username or password error");
       return res.status(401).json({ status: "error", msg: "login fail" });
     }
     //3. create tokens:
     const claims = {
-      email: auth.email,
+      username: auth.username,
       role: auth.role,
     };
     const access = jwt.sign(claims, process.env.ACCESS_SECRET, {
@@ -79,7 +84,7 @@ const refresh = async (req, res) => {
     const decoded = jwt.verify(req.body.refresh, process.env.REFRESH_SECRET);
 
     const claims = {
-      email: decoded.email,
+      username: decoded.username,
       role: decoded.role,
     };
     const access = jwt.sign(claims, process.env.ACCESS_SECRET, {
