@@ -1,28 +1,39 @@
-// GameList.jsx
 import React, { useState, useEffect } from "react";
 import GameCard from "./GameCard";
 import gameData from "../assets/gameData.json";
 
-function GameList() {
-  const [selectedGenre, setSelectedGenre] = useState("All"); // State for selected genre
-  const [selectedPlatform, setSelectedPlatform] = useState("All"); // State for selected platform
+function GameList({ searchTerm }) {
+  const [selectedGenre, setSelectedGenre] = useState("All");
+  const [selectedPlatform, setSelectedPlatform] = useState("All");
+  const [selectedSort, setSelectedSort] = useState("None");
   const [gamesToDisplay, setGamesToDisplay] = useState([]);
 
-  // Function to handle genre selection
   const handleGenreChange = (event) => {
     setSelectedGenre(event.target.value);
-    setGamesToDisplay([]); // Clear the current list of games
+    setGamesToDisplay([]);
   };
 
-  // Function to handle platform selection
   const handlePlatformChange = (event) => {
     setSelectedPlatform(event.target.value);
-    setGamesToDisplay([]); // Clear the current list of games
+    setGamesToDisplay([]);
+  };
+
+  const handleSortChange = (event) => {
+    setSelectedSort(event.target.value);
+    setGamesToDisplay([]);
   };
 
   useEffect(() => {
-    // Load all games when the component mounts or when the genre or platform changes
     let games = gameData;
+    if (searchTerm) {
+      games = games.filter(
+        (game) =>
+          game.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          game.tags.some((tag) =>
+            tag.name.toLowerCase().includes(searchTerm.toLowerCase())
+          )
+      );
+    }
     if (selectedGenre !== "All") {
       games = games.filter((game) =>
         game.genres.some((genre) => genre.name === selectedGenre)
@@ -35,8 +46,24 @@ function GameList() {
         )
       );
     }
+    switch (selectedSort) {
+      case "AlphabeticallyAsc":
+        games.sort((a, b) => a.name.localeCompare(b.name));
+        break;
+      case "AlphabeticallyDesc":
+        games.sort((a, b) => b.name.localeCompare(a.name));
+        break;
+      case "ReleaseDateAsc":
+        games.sort((a, b) => new Date(a.released) - new Date(b.released));
+        break;
+      case "ReleaseDateDesc":
+        games.sort((a, b) => new Date(b.released) - new Date(a.released));
+        break;
+      default:
+        break;
+    }
     setGamesToDisplay(games);
-  }, [selectedGenre, selectedPlatform]);
+  }, [searchTerm, selectedGenre, selectedPlatform, selectedSort]);
 
   return (
     <div>
@@ -62,7 +89,7 @@ function GameList() {
         <select
           value={selectedPlatform}
           onChange={handlePlatformChange}
-          className="border border-gray-300 rounded-md p-2"
+          className="border border-gray-300 rounded-md p-2 mr-2"
         >
           <option value="All">All Platforms</option>
           {[
@@ -76,6 +103,18 @@ function GameList() {
               {platform}
             </option>
           ))}
+        </select>
+        {/* Sort Dropdown */}
+        <select
+          value={selectedSort}
+          onChange={handleSortChange}
+          className="border border-gray-300 rounded-md p-2 ml-2"
+        >
+          <option value="None">Sort By</option>
+          <option value="AlphabeticallyAsc">Alphabetically (Asc)</option>
+          <option value="AlphabeticallyDesc">Alphabetically (Desc)</option>
+          <option value="ReleaseDateAsc">Release Date (Asc)</option>
+          <option value="ReleaseDateDesc">Release Date (Desc)</option>
         </select>
       </div>
       <div className="grid grid-cols-3 gap-4">
