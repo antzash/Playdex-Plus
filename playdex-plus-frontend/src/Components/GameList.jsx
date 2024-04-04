@@ -44,32 +44,24 @@ function GameList() {
       setGamesToDisplay(games);
     }
   }, [currentPage, selectedGenre, selectedPlatform]);
-
   const loadMoreGames = () => {
     // Calculate the start index for the next set of games
     const startIndex = gamesToDisplay.length;
     const endIndex = startIndex + 30;
     let newGames = gameData.slice(startIndex, endIndex);
-    if (selectedGenre !== "All") {
-      newGames = newGames.filter((game) =>
-        game.genres.some((genre) => genre.name === selectedGenre)
-      );
-    }
-    if (selectedPlatform !== "All") {
-      newGames = newGames.filter((game) =>
-        game.parent_platforms.some(
-          (platform) => platform.platform.name === selectedPlatform
-        )
-      );
-    }
 
-    // Append the new games to the current list
-    setGamesToDisplay([...gamesToDisplay, ...newGames]);
+    // Apply filters to the new set of games before appending them
+    newGames = applyFilters(newGames);
+
+    // Check if there are any new games after applying filters
+    if (newGames.length > 0) {
+      setGamesToDisplay([...gamesToDisplay, ...newGames]);
+    }
   };
 
   return (
     <div>
-      <div className="flex items-center mb-4">
+      <div className="flex j items-center mb-4">
         {/* Genres Dropdown */}
         <select
           value={selectedGenre}
