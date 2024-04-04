@@ -40,7 +40,7 @@ function GameList() {
 
   return (
     <div>
-      <div className="flex j items-center mb-4">
+      <div className="flex items-center mb-4">
         {/* Genres Dropdown */}
         <select
           value={selectedGenre}
@@ -78,7 +78,7 @@ function GameList() {
           ))}
         </select>
       </div>
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-cols-3 gap-4">
         {gamesToDisplay.map((game, index) => (
           <GameCard key={index} game={game} />
         ))}

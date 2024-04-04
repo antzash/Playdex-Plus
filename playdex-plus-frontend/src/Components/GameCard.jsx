@@ -13,13 +13,13 @@ const GameCard = ({ game }) => {
   return (
     <div
       key={game.id}
-      className="relative rounded-lg group hover:scale-110 transition-all duration-300 ease-in-out cursor-pointer flex flex-col justify-between h-full"
+      className="p-5 relative rounded-lg group hover:scale-110 transition-all duration-300 ease-in-out cursor-pointer flex flex-col justify-between h-full shadow-xl hover:shadow-lg hover:text-white"
     >
       <div>
         <img
           src={game.background_image}
           alt={game.name}
-          className="lazy h-[200px] w-[250px] rounded-xl object-cover"
+          className="lazy h-[200px] w-full rounded-xl object-cover"
           loading="lazy"
         />
         <h2 className="text-[16px] mt-2 text-left text-violet-800 font-bold">
