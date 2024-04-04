@@ -16,14 +16,14 @@ const GameCard = ({ game }) => {
         <img
           src={game.background_image}
           alt={game.name}
-          className="lazy h-[200px] w-full rounded-xl object-cover"
+          className="lazy h-[200px] w-[250px] rounded-xl object-cover"
           loading="lazy"
         />
-        <h2 className="text-[16px] text-left text-violet-800 font-bold p-2">
+        <h2 className="text-[16px] text-left text-violet-800 font-bold">
           {game.name}
         </h2>
       </div>
-      <div className="text-[10px] text-left text-black font-light p-2">
+      <div className="text-[10px] text-left text-black font-light p-1">
         {platformStr}
       </div>
     </div>

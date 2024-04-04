@@ -13,7 +13,7 @@ function Home() {
 
   return (
     <div className="flex">
-      <div className="w-full">
+      <div className="text-right w-3/4 mt-10">
         <GameList />
       </div>
     </div>
