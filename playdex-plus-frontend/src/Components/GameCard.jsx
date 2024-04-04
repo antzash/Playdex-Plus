@@ -19,7 +19,7 @@ const GameCard = ({ game }) => {
           className="lazy h-[200px] w-[250px] rounded-xl object-cover"
           loading="lazy"
         />
-        <h2 className="text-[16px] text-left text-violet-800 font-bold">
+        <h2 className="text-[16px] mt-2 text-left text-violet-800 font-bold">
           {game.name}
         </h2>
       </div>

@@ -6,6 +6,7 @@ import gameData from "../assets/gameData.json"; // Adjust the import path as nec
 function GameList() {
   const [currentPage, setCurrentPage] = useState(1);
   const [gamesToDisplay, setGamesToDisplay] = useState([]);
+  const [selectedGenre, setSelectedGenre] = useState("All"); // State for selected genre
 
   useEffect(() => {
     // Load the first 30 games when the component mounts
