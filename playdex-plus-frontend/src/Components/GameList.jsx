@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import GameCard from "./GameCard";
 import gameData from "../assets/gameData.json";
 
-function GameList() {
+function GameList({ searchTerm }) {
   const [selectedGenre, setSelectedGenre] = useState("All");
   const [selectedPlatform, setSelectedPlatform] = useState("All");
   const [selectedSort, setSelectedSort] = useState("None");
@@ -25,6 +25,15 @@ function GameList() {
 
   useEffect(() => {
     let games = gameData;
+    if (searchTerm) {
+      games = games.filter(
+        (game) =>
+          game.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          game.tags.some((tag) =>
+            tag.name.toLowerCase().includes(searchTerm.toLowerCase())
+          )
+      );
+    }
     if (selectedGenre !== "All") {
       games = games.filter((game) =>
         game.genres.some((genre) => genre.name === selectedGenre)
@@ -54,7 +63,7 @@ function GameList() {
         break;
     }
     setGamesToDisplay(games);
-  }, [selectedGenre, selectedPlatform, selectedSort]);
+  }, [searchTerm, selectedGenre, selectedPlatform, selectedSort]);
 
   return (
     <div>
