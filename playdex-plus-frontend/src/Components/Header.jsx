@@ -10,7 +10,7 @@ function Header({ searchTerm, handleSearchInput, handleSearch }) {
     <div className="flex items-center justify-between p-4">
       <div className="flex items-center">
         <Link to="/">
-          <SiYoutubegaming className="text-violet-800 font-bold text-[40px] mr-2" />
+          <SiYoutubegaming className="text-violet-800 font-bold text-[40px] mr-2 transition-transform duration-300 ease-in-out transform hover:scale-110 cursor-pointer" />
         </Link>
       </div>
       <div className="flex p-2 w-full mx-5 rounded-full">
