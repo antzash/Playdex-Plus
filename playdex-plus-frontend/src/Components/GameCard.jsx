@@ -7,6 +7,9 @@ const GameCard = ({ game }) => {
     .map((platform) => platform.platform.name)
     .join(", ");
 
+  // Map over the genres array to create a string of genre names
+  const genreStr = game.genres.map((genre) => genre.name).join(", ");
+
   return (
     <div
       key={game.id}
@@ -22,6 +25,9 @@ const GameCard = ({ game }) => {
         <h2 className="text-[16px] mt-2 text-left text-violet-800 font-bold">
           {game.name}
         </h2>
+      </div>
+      <div className="text-[12px] text-left text-black font-bold">
+        {genreStr}
       </div>
       <div className="text-[10px] text-left text-black font-light p-1">
         {platformStr}
