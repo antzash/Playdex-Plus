@@ -7,6 +7,7 @@ function GameList({ searchTerm }) {
   const [selectedGenre, setSelectedGenre] = useState("All"); // State for selected genre
   const [selectedPlatform, setSelectedPlatform] = useState("All"); // State for selected platform
   const [gamesToDisplay, setGamesToDisplay] = useState([]);
+  const [sortOption, setSortOption] = useState("default"); // Default sort option
 
   // Function to handle genre selection
   const handleGenreChange = (event) => {
@@ -18,6 +19,22 @@ function GameList({ searchTerm }) {
   const handlePlatformChange = (event) => {
     setSelectedPlatform(event.target.value);
     setGamesToDisplay([]); // Clear the current list of games
+  };
+
+  const sortGames = (games) => {
+    let sortedGames = [...games];
+
+    if (sortOption === "A-Z") {
+      sortedGames.sort((a, b) => a.name.localeCompare(b.name));
+    } else if (sortOption === "Z-A") {
+      sortedGames.sort((a, b) => b.name.localeCompare(a.name));
+    } else if (sortOption === "Release (asc)") {
+      sortedGames.sort((a, b) => new Date(a.released) - new Date(b.released));
+    } else if (sortOption === "Release (desc)") {
+      sortedGames.sort((a, b) => new Date(b.released) - new Date(a.released));
+    }
+
+    return sortedGames;
   };
 
   useEffect(() => {
@@ -44,8 +61,12 @@ function GameList({ searchTerm }) {
           )
       );
     }
+    // Apply sorting if not "default"
+    if (sortOption !== "default") {
+      games = sortGames(games);
+    }
     setGamesToDisplay(games);
-  }, [searchTerm, selectedGenre, selectedPlatform]);
+  }, [searchTerm, selectedGenre, selectedPlatform, sortOption]);
 
   return (
     <div>
@@ -85,6 +106,18 @@ function GameList({ searchTerm }) {
               {platform}
             </option>
           ))}
+        </select>
+        {/* Sorting Dropdown */}
+        <select
+          value={sortOption}
+          onChange={(e) => setSortOption(e.target.value)}
+          className="border border-gray-300 rounded-md p-2 ml-2"
+        >
+          <option value="default">Sort By</option>
+          <option value="A-Z">A-Z</option>
+          <option value="Z-A">Z-A</option>
+          <option value="Release (asc)">Release (asc)</option>
+          <option value="Release (desc)">Release (desc)</option>
         </select>
       </div>
       <div className="grid grid-cols-3 gap-4">
