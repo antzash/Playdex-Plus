@@ -1,5 +1,6 @@
 // GameCard.jsx
 import React from "react";
+import { FaPlus } from "react-icons/fa"; // Import the plus icon
 
 const GameCard = ({ game }) => {
   // Assuming platformStr is a string that contains the platforms
@@ -29,8 +30,14 @@ const GameCard = ({ game }) => {
       <div className="text-[12px] text-left text-black font-bold">
         {genreStr}
       </div>
-      <div className="text-[10px] text-left text-black font-light p-1">
+      <div className="text-[10px] text-left text-black font-light mt-2">
         {platformStr}
+      </div>
+      {/* Add the button with a plus icon here */}
+      <div className="absolute bottom-0 right-0 m-5">
+        <button className=" hover:bg-violet-500 text-violet-800 py-2 px-4 rounded-full flex items-center justify-center">
+          <FaPlus />
+        </button>
       </div>
     </div>
   );
