@@ -7,6 +7,7 @@ function GameList() {
   const [currentPage, setCurrentPage] = useState(1);
   const [gamesToDisplay, setGamesToDisplay] = useState([]);
   const [selectedGenre, setSelectedGenre] = useState("All"); // State for selected genre
+  const [selectedPlatform, setSelectedPlatform] = useState("All"); // State for selected platform
 
   // Function to handle genre selection
   const handleGenreChange = (event) => {
@@ -15,8 +16,15 @@ function GameList() {
     setGamesToDisplay([]); // Clear the current list of games
   };
 
+  // Function to handle platform selection
+  const handlePlatformChange = (event) => {
+    setSelectedPlatform(event.target.value);
+    setCurrentPage(1); // Reset to the first page when changing platform
+    setGamesToDisplay([]); // Clear the current list of games
+  };
+
   useEffect(() => {
-    // Load the first 30 games when the component mounts or when the genre changes
+    // Load the first 30 games when the component mounts or when the genre or platform changes
     if (currentPage === 1) {
       const startIndex = 0;
       const endIndex = 30;
@@ -26,9 +34,16 @@ function GameList() {
           game.genres.some((genre) => genre.name === selectedGenre)
         );
       }
+      if (selectedPlatform !== "All") {
+        games = games.filter((game) =>
+          game.parent_platforms.some(
+            (platform) => platform.platform.name === selectedPlatform
+          )
+        );
+      }
       setGamesToDisplay(games);
     }
-  }, [currentPage, selectedGenre]);
+  }, [currentPage, selectedGenre, selectedPlatform]);
 
   const loadMoreGames = () => {
     // Calculate the start index for the next set of games
@@ -40,6 +55,13 @@ function GameList() {
         game.genres.some((genre) => genre.name === selectedGenre)
       );
     }
+    if (selectedPlatform !== "All") {
+      newGames = newGames.filter((game) =>
+        game.parent_platforms.some(
+          (platform) => platform.platform.name === selectedPlatform
+        )
+      );
+    }
 
     // Append the new games to the current list
     setGamesToDisplay([...gamesToDisplay, ...newGames]);
@@ -47,14 +69,14 @@ function GameList() {
 
   return (
     <div>
-      <div className="flex justify-between items-center mb-4">
+      <div className="flex items-center mb-4">
+        {/* Genres Dropdown */}
         <select
           value={selectedGenre}
           onChange={handleGenreChange}
-          className="border border-gray-300 rounded-md p-2"
+          className="border border-gray-300 rounded-md p-2 mr-2"
         >
           <option value="All">All Genres</option>
-          {/* Assuming genres are unique and can be extracted from gameData */}
           {[
             ...new Set(
               gameData.flatMap((game) => game.genres.map((genre) => genre.name))
@@ -62,6 +84,25 @@ function GameList() {
           ].map((genre) => (
             <option key={genre} value={genre}>
               {genre}
+            </option>
+          ))}
+        </select>
+        {/* Platforms Dropdown */}
+        <select
+          value={selectedPlatform}
+          onChange={handlePlatformChange}
+          className="border border-gray-300 rounded-md p-2"
+        >
+          <option value="All">All Platforms</option>
+          {[
+            ...new Set(
+              gameData.flatMap((game) =>
+                game.parent_platforms.map((platform) => platform.platform.name)
+              )
+            ),
+          ].map((platform) => (
+            <option key={platform} value={platform}>
+              {platform}
             </option>
           ))}
         </select>
