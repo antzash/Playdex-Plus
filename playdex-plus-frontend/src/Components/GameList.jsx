@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import GameCard from "./GameCard";
 import gameData from "../assets/gameData.json";
 
-function GameList() {
+function GameList({ searchTerm }) {
   const [selectedGenre, setSelectedGenre] = useState("All"); // State for selected genre
   const [selectedPlatform, setSelectedPlatform] = useState("All"); // State for selected platform
   const [gamesToDisplay, setGamesToDisplay] = useState([]);
@@ -21,7 +21,7 @@ function GameList() {
   };
 
   useEffect(() => {
-    // Load all games when the component mounts or when the genre or platform changes
+    // Load all games when the component mounts or when the genre, platform, or searchTerm changes
     let games = gameData;
     if (selectedGenre !== "All") {
       games = games.filter((game) =>
@@ -35,8 +35,17 @@ function GameList() {
         )
       );
     }
+    if (searchTerm) {
+      games = gameData.filter(
+        (game) =>
+          game.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          game.tags.some((tag) =>
+            tag.name.toLowerCase().includes(searchTerm.toLowerCase())
+          )
+      );
+    }
     setGamesToDisplay(games);
-  }, [selectedGenre, selectedPlatform]);
+  }, [searchTerm, selectedGenre, selectedPlatform]);
 
   return (
     <div>

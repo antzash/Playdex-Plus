@@ -1,30 +1,11 @@
-import React, { useState } from "react";
+// Header.jsx
+import React from "react";
 import { IoHeart } from "react-icons/io5";
 import { SiYoutubegaming } from "react-icons/si";
 import { Link } from "react-router-dom";
 import gameData from "../assets/gameData.json";
 
-function Header() {
-  const [searchTerm, setSearchTerm] = useState("");
-
-  function handleSearchInput(event) {
-    setSearchTerm(event.target.value);
-  }
-
-  function handleSearch(event) {
-    if (event.key === "Enter") {
-      const filteredGames = gameData.filter(
-        (game) =>
-          game.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          game.tags.some((tag) =>
-            tag.name.toLowerCase().includes(searchTerm.toLowerCase())
-          )
-      );
-      console.log(filteredGames);
-      // Here you would update the game list to reflect the search results
-    }
-  }
-
+function Header({ searchTerm, handleSearchInput, handleSearch }) {
   return (
     <div className="flex items-center justify-between p-4">
       <div className="flex items-center">
