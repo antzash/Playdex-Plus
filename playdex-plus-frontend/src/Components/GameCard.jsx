@@ -8,6 +8,12 @@ const GameCard = ({ game }) => {
     .map((platform) => platform.platform.name)
     .join(", ");
 
+  // Truncate the platformStr if it's longer than 30 characters
+  const truncatedPlatformStr =
+    platformStr.length > 30
+      ? `${platformStr.substring(0, 30)}...`
+      : platformStr;
+
   // Map over the genres array to create a string of genre names
   const genreStr = game.genres.map((genre) => genre.name).join(", ");
 
@@ -31,7 +37,7 @@ const GameCard = ({ game }) => {
         {genreStr}
       </div>
       <div className="text-[10px] text-left text-black font-light mt-2">
-        {platformStr}
+        {truncatedPlatformStr}
       </div>
       {/* Add the button with a plus icon here */}
       <div className="absolute bottom-0 right-0 m-5">
@@ -42,5 +48,4 @@ const GameCard = ({ game }) => {
     </div>
   );
 };
-
 export default GameCard;
