@@ -50,9 +50,9 @@ function Home() {
             handleSearch={handleSearch}
           />
         </div>
-        {/* <div className="w-1/4 shadow-lg text-right p-10">
+        <div className="w-1/4 text-right p-10 mt-10 ml-10 shadow-lg">
           <Sidebar />
-        </div> */}
+        </div>
       </div>
     </div>
   );

@@ -1,7 +1,6 @@
-// UserSidebar.jsx
 import React from "react";
 
-const Sidebar = () => {
+function Sidebar() {
   const users = [
     { username: "Anthony" },
     { username: "Lek Ee" },
@@ -9,17 +8,24 @@ const Sidebar = () => {
   ];
 
   return (
-    <div className="w-1/4 mt-10 text-align-right">
-      <h2 className="text-xl font-bold mb-4">Other Users</h2>
+    <div>
+      <h2 className="text-[30px] text-violet-800 font-bold mb-4">
+        Other Users
+      </h2>
       <ul>
         {users.map((user, index) => (
-          <li key={index} className="mb-2">
-            {user.username}
+          <li
+            key={index}
+            className="mb-2 cursor-pointer hover:bg-violet-200 p-2 rounded-full"
+          >
+            <a href="#" className="text-[20px]">
+              {user.username}
+            </a>
           </li>
         ))}
       </ul>
     </div>
   );
-};
+}
 
 export default Sidebar;
