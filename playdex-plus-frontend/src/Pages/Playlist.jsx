@@ -8,7 +8,7 @@ function Playlist() {
     <div>
       <Header />
       <h1 className="text-[30px] text-violet-800 font-bold text-left mt-10">
-        Your Playlists
+        Your Playlist
       </h1>
     </div>
   );
