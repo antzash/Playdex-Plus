@@ -5,6 +5,16 @@ import { FaMinus } from "react-icons/fa";
 const FavouriteCard = ({ game }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [currentScreenshotIndex, setCurrentScreenshotIndex] = useState(0);
+  const [gameStatus, setGameStatus] = useState("Not Bought");
+
+  const gameStatusOptions = [
+    "Not Bought",
+    "Bought",
+    "Played",
+    "Repeat",
+    "Wait For Sale",
+    "Not My Thing",
+  ];
 
   const handleMouseEnter = () => setIsHovered(true);
   const handleMouseLeave = () => setIsHovered(false);
@@ -20,6 +30,31 @@ const FavouriteCard = ({ game }) => {
     }
     return () => clearInterval(intervalId); // Cleanup on component unmount or hover end
   }, [isHovered, game.short_screenshots.length]);
+
+  const updateGameStatus = async (gameId, status) => {
+    try {
+      const response = await fetch(`/api/games/${gameId}/status`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ status }),
+      });
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error("There was a problem with the fetch operation:", error);
+    }
+  };
+
+  useEffect(() => {
+    if (game.id) {
+      updateGameStatus(game.id, gameStatus);
+    }
+  }, [gameStatus]);
 
   return (
     <div
@@ -50,6 +85,17 @@ const FavouriteCard = ({ game }) => {
             .map((platform) => platform.platform.name)
             .join(", ")}
         </p>
+        <select
+          value={gameStatus}
+          onChange={(e) => setGameStatus(e.target.value)}
+          className="bg-violet-800 text-white hover:bg-whitesmoke hover:text-violet rounded-full font-bold py-2 px-2 mt-4"
+        >
+          {gameStatusOptions.map((status) => (
+            <option key={status} value={status}>
+              {status}
+            </option>
+          ))}
+        </select>
       </div>
       <div className="absolute bottom-4 right-4">
         <button className="bg-whitesmoke hover:bg-violet-800 hover:text-white text-violet-800 rounded-full font-bold py-1 px-3 rounded">
