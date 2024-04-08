@@ -8,6 +8,7 @@ const cors = require("cors");
 const helmet = require("helmet");
 const rateLimit = require("express-rate-limit");
 
+const games = require("./src/routers/games");
 const roles = require("./src/routers/roles");
 const auth = require("./src/routers/auth");
 
@@ -29,6 +30,7 @@ app.use(limiter); // Apply rate limiting
 app.use(express.json()); // Parse JSON bodies
 app.use(express.urlencoded({ extended: false })); // Parse URL-encoded bodies
 
+app.use("/games", games);
 app.use("/roles", roles);
 app.use("/auth", auth);
 
