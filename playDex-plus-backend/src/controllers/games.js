@@ -2022,7 +2022,17 @@ const getAllGames = async (req, res) => {
     res.json(allGames);
   } catch (error) {
     console.error(error.message);
-    res.json({ status: "error", msg: "getting all games error" });
+    res.json({ status: "error", msg: "error getting all games" });
+  }
+};
+
+const getGameById = async (req, res) => {
+  try {
+    const game = await Games.findById(req.body.id);
+    res.json(game);
+  } catch (error) {
+    console.error(error.message);
+    res.status(400).json({ status: "error", msg: "error getting game" });
   }
 };
 
@@ -2072,42 +2082,35 @@ const addFavourites = async (req, res) => {
   }
 };
 
-const updateBook = async (req, res) => {
+const updateGame = async (req, res) => {
   try {
-    const updateBook = {};
-    if ("date" in req.body) updateBook.date = req.body.date;
-    if ("time" in req.body) updateBook.time = req.body.time;
-    if ("type" in req.body) updateBook.type = req.body.type;
-    if ("company" in req.body) updateBook.company = req.body.company;
-    if ("address" in req.body) updateBook.address = req.body.address;
-    if ("personnel" in req.body) updateBook.personnel = req.body.personnel;
-    if ("notes" in req.body) updateBook.notes = req.body.notes;
-    if ("title" in req.body) updateBook.title = req.body.title;
-    if ("progress" in req.body) updateBook.progress = req.body.progress;
-    if ("contact" in req.body) updateBook.contact = req.body.contact;
+    const updateGame = {};
+    if ("id" in req.body) updateGame.id = req.body.id;
+    //subjected to frontend
 
-    await Appointment.findByIdAndUpdate(req.params.id, updateBook);
-    res.json({ status: "ok", msg: "book updated" });
+    await Favourites.findByIdAndUpdate(req.params.id, updateGame);
+    res.json({ status: "ok", msg: "game updated" });
   } catch (error) {
     console.error(error.message);
-    res.status(400).json({ status: "error", msg: "error updating book" });
+    res.status(400).json({ status: "error", msg: "error updating game" });
   }
 };
 
-const removeBook = async (req, res) => {
+const removeGame = async (req, res) => {
   try {
-    await Appointment.findByIdAndDelete(req.params.id);
-    res.json({ status: "ok", msg: "book deleted" });
+    await Favourites.findByIdAndDelete(req.params.id);
+    res.json({ status: "ok", msg: "game deleted" });
   } catch (error) {
     console.error(error.message);
-    res.status(400).json({ status: "error", msg: "error deleting book" });
+    res.status(400).json({ status: "error", msg: "error deleting game" });
   }
 };
 
 module.exports = {
   seedGames,
   getAllGames,
+  getGameById,
   addFavourites,
-  updateBook,
-  removeBook,
+  updateGame,
+  removeGame,
 };

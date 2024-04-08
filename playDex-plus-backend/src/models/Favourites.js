@@ -2,11 +2,9 @@ const mongoose = require("mongoose");
 
 const FavListSchema = new mongoose.Schema(
   {
+    name: { type: String },
     username: { type: String },
-    games: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Games",
-    },
+    id: { type: Number },
   },
   { collection: "favourites" }
 );
