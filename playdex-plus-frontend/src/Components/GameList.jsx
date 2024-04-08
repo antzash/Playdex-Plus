@@ -1,25 +1,50 @@
-// GameList.jsx
 import React, { useState, useEffect } from "react";
-import GameCard from "./GameCard";
+import GameCard from "./GameCard"; // Assuming you have a GameCard component
 
 function GameList({ searchTerm }) {
-  const [selectedGenre, setSelectedGenre] = useState("All"); // State for selected genre
-  const [selectedPlatform, setSelectedPlatform] = useState("All"); // State for selected platform
+  const [selectedGenre, setSelectedGenre] = useState("All");
+  const [selectedPlatform, setSelectedPlatform] = useState("All");
   const [gamesToDisplay, setGamesToDisplay] = useState([]);
-  const [sortOption, setSortOption] = useState("default"); // Default sort option
+  const [sortOption, setSortOption] = useState("default");
   const [gameData, setGameData] = useState([]);
 
-  // Function to handle genre selection
-  const handleGenreChange = (event) => {
-    setSelectedGenre(event.target.value);
-    setGamesToDisplay([]); // Clear the current list of games
-  };
+  useEffect(() => {
+    fetch("http://localhost:5001/games/game_info")
+      .then((response) => response.json())
+      .then((data) => {
+        setGameData(data);
+      })
+      .catch((error) => console.error("Error fetching games:", error));
+  }, []);
 
-  // Function to handle platform selection
-  const handlePlatformChange = (event) => {
-    setSelectedPlatform(event.target.value);
-    setGamesToDisplay([]); // Clear the current list of games
-  };
+  useEffect(() => {
+    let games = gameData;
+    if (selectedGenre !== "All") {
+      games = games.filter((game) =>
+        game.genres.some((genre) => genre.name === selectedGenre)
+      );
+    }
+    if (selectedPlatform !== "All") {
+      games = games.filter((game) =>
+        game.parent_platforms.some(
+          (platform) => platform.platform.name === selectedPlatform
+        )
+      );
+    }
+    if (searchTerm) {
+      games = games.filter(
+        (game) =>
+          game.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          game.tags.some((tag) =>
+            tag.name.toLowerCase().includes(searchTerm.toLowerCase())
+          )
+      );
+    }
+    if (sortOption !== "default") {
+      games = sortGames(games);
+    }
+    setGamesToDisplay(games);
+  }, [searchTerm, selectedGenre, selectedPlatform, sortOption, gameData]);
 
   const sortGames = (games) => {
     let sortedGames = [...games];
@@ -37,49 +62,13 @@ function GameList({ searchTerm }) {
     return sortedGames;
   };
 
-  useEffect(() => {
-    // Fetch all games when the component mounts or when the genre, platform, or searchTerm changes
-    fetch("http://localhost:5001/games/game_info")
-      .then((response) => response.json())
-      .then((data) => {
-        let games = data;
-        if (selectedGenre !== "All") {
-          games = games.filter((game) =>
-            game.genres.some((genre) => genre.name === selectedGenre)
-          );
-        }
-        if (selectedPlatform !== "All") {
-          games = games.filter((game) =>
-            game.parent_platforms.some(
-              (platform) => platform.platform.name === selectedPlatform
-            )
-          );
-        }
-        if (searchTerm) {
-          games = games.filter(
-            (game) =>
-              game.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-              game.tags.some((tag) =>
-                tag.name.toLowerCase().includes(searchTerm.toLowerCase())
-              )
-          );
-        }
-        // Apply sorting if not "default"
-        if (sortOption !== "default") {
-          games = sortGames(games);
-        }
-        setGamesToDisplay(games);
-      })
-      .catch((error) => console.error("Error fetching games:", error));
-  }, [searchTerm, selectedGenre, selectedPlatform, sortOption]);
-
   return (
     <div>
       <div className="flex items-center mb-4">
         {/* Genres Dropdown */}
         <select
           value={selectedGenre}
-          onChange={handleGenreChange}
+          onChange={(e) => setSelectedGenre(e.target.value)}
           className="border border-gray-300 rounded-md p-2 mr-2"
         >
           <option value="All">All Genres</option>
@@ -96,7 +85,7 @@ function GameList({ searchTerm }) {
         {/* Platforms Dropdown */}
         <select
           value={selectedPlatform}
-          onChange={handlePlatformChange}
+          onChange={(e) => setSelectedPlatform(e.target.value)}
           className="border border-gray-300 rounded-md p-2"
         >
           <option value="All">All Platforms</option>
