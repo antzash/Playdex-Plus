@@ -33,7 +33,7 @@ const GameCard = ({ game, playlists, onAddToPlaylist }) => {
         setCurrentScreenshotIndex(
           (prevIndex) => (prevIndex + 1) % game.short_screenshots.length
         );
-      }, 800); // Change screenshot every 2 seconds
+      }, 800); //
     }
     return () => clearInterval(intervalId); // Cleanup on component unmount or hover end
   }, [isHovered, game.short_screenshots]);
