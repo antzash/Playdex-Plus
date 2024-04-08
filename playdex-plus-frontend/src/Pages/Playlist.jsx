@@ -2,9 +2,11 @@
 import React, { useState, useEffect } from "react";
 import CustomPlaylist from "../Components/CustomPlaylist";
 import Header from "../Components/Header";
+
 function Playlist() {
   const [playlists, setPlaylists] = useState([]);
   const [newPlaylistName, setNewPlaylistName] = useState("");
+  console.log(playlists);
 
   useEffect(() => {
     // Load playlists from local storage when the component mounts
@@ -76,6 +78,8 @@ function Playlist() {
             playlist={playlist}
             onUpdate={handleUpdatePlaylist}
             onDelete={handleDeletePlaylist}
+            // Assuming games are passed to each CustomPlaylist for display
+            games={[]} // Replace with actual games array if needed
           />
         ))}
       </div>
