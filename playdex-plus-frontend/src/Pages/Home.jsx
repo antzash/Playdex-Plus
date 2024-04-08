@@ -30,7 +30,7 @@ function Home() {
   useEffect(() => {
     const timer = setInterval(() => {
       selectRandomGame();
-    }, 10000); // 10000 milliseconds = 10 seconds
+    }, 3000); // 10000 milliseconds = 10 seconds
 
     // Cleanup function to clear the interval when the component unmounts
     return () => clearInterval(timer);
