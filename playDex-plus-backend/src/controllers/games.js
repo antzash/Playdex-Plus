@@ -67,6 +67,16 @@ const addFavourites = async (req, res) => {
   }
 };
 
+const getFavourites = async (req, res) => {
+  try {
+    const favourites = await Favourites.find();
+    res.json(favourites);
+  } catch (error) {
+    console.error(error.message);
+    res.json({ status: "error", msg: "error getting favourites" });
+  }
+};
+
 const updateGame = async (req, res) => {
   try {
     const updateGame = {};
@@ -95,6 +105,7 @@ module.exports = {
   getAllGames,
   getGameById,
   addFavourites,
+  getFavourites,
   updateGame,
   removeGame,
 };
