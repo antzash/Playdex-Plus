@@ -1,8 +1,9 @@
 // src/Components/CustomPlaylist.jsx
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
-function CustomPlaylist({ playlist, onUpdate, onDelete }) {
+function CustomPlaylist({ playlist, onUpdate, onDelete, games }) {
   const [name, setName] = useState(playlist.name);
+  const [showGames, setShowGames] = useState(false); // State to control games visibility
 
   const handleNameChange = (e) => {
     setName(e.target.value);
@@ -14,6 +15,10 @@ function CustomPlaylist({ playlist, onUpdate, onDelete }) {
 
   const handleDelete = () => {
     onDelete(playlist.id);
+  };
+
+  const toggleGames = () => {
+    setShowGames(!showGames);
   };
 
   return (
@@ -37,6 +42,16 @@ function CustomPlaylist({ playlist, onUpdate, onDelete }) {
       >
         Delete
       </button>
+      <button
+        onClick={toggleGames}
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+      >
+        Show Games
+      </button>
+      {showGames &&
+        games.map((game) => (
+          <div key={game.id}>{game.name}</div> // Assuming games have an 'id' and 'name' property
+        ))}
     </div>
   );
 }
