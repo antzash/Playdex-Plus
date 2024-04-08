@@ -23,7 +23,7 @@ const FavouriteCard = ({ game }) => {
 
   return (
     <div
-      className={`relative p-4 bg-white shadow-md rounded-md overflow-hidden transition-all duration-300 ease-in-out ${
+      className={`p-5 relative rounded-lg group hover:scale-110 transition-all duration-300 ease-in-out cursor-pointer flex flex-col justify-between h-full shadow-xl hover:shadow-lg hover:text-white ${
         isHovered ? "shadow-lg" : ""
       }`}
       onMouseEnter={handleMouseEnter}
