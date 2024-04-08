@@ -45,7 +45,7 @@ function Home() {
           handleSearch={handleSearch}
         />
       </div>
-      {/* <Banner game={currentGame} />{" "} */}
+      <Banner game={currentGame} />{" "}
       {/* Display the current game in the banner */}
       <div className="flex w-full">
         <div className="w-3/4">
