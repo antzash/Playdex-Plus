@@ -17,15 +17,26 @@ function CustomPlaylist({ playlist, onUpdate, onDelete }) {
   };
 
   return (
-    <div>
+    <div className="flex items-center space-x-2 mb-4">
       <input
         type="text"
         value={name}
         onChange={handleNameChange}
         placeholder="Playlist Name"
+        className="flex-grow p-2 border border-gray-300 rounded-md"
       />
-      <button onClick={handleUpdate}>Update</button>
-      <button onClick={handleDelete}>Delete</button>
+      <button
+        onClick={handleUpdate}
+        className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+      >
+        Update
+      </button>
+      <button
+        onClick={handleDelete}
+        className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+      >
+        Delete
+      </button>
     </div>
   );
 }
