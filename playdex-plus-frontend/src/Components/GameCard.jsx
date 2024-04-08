@@ -1,19 +1,12 @@
 // GameCard.jsx
 import React, { useState } from "react";
 import { FaPlus } from "react-icons/fa"; // Import the plus icon
-import Modal from "./Modal";
 
 const GameCard = ({ game, playlists, onAddToPlaylist }) => {
-  const [showModal, setShowModal] = useState(false);
   // Assuming platformStr is a string that contains the platforms
   const platformStr = game.parent_platforms
     .map((platform) => platform.platform.name)
     .join(", ");
-
-  const handleAddToPlaylist = (playlistId) => {
-    onAddToPlaylist(game.id, playlistId);
-    setShowModal(false);
-  };
 
   // Truncate the platformStr if it's longer than 30 characters
   const truncatedPlatformStr =
@@ -23,11 +16,6 @@ const GameCard = ({ game, playlists, onAddToPlaylist }) => {
 
   // Map over the genres array to create a string of genre names
   const genreStr = game.genres.map((genre) => genre.name).join(", ");
-
-  // Function to log playlists when the FaPlus button is clicked
-  const handleLogPlaylists = () => {
-    console.log(playlists);
-  };
 
   return (
     <div
@@ -52,10 +40,7 @@ const GameCard = ({ game, playlists, onAddToPlaylist }) => {
         {truncatedPlatformStr}
       </div>
       <div className="absolute bottom-0 right-0 m-5">
-        <button
-          onClick={handleLogPlaylists}
-          className=" hover:bg-violet-500 text-violet-800 py-2 px-4 rounded-full flex items-center justify-center"
-        >
+        <button className=" hover:bg-violet-500 text-violet-800 py-2 px-4 rounded-full flex items-center justify-center">
           <FaPlus />
         </button>
       </div>
