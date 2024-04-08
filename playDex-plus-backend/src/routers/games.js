@@ -1,13 +1,13 @@
 const express = require("express");
 const router = express.Router();
 const {
-  seedGames,
   getAllGames,
   getGameById,
   addFavourites,
   updateGame,
   removeGame,
 } = require("../controllers/games");
+const { seedGames } = require("../controllers/gameSeed");
 
 router.get("/game_info/seed", seedGames);
 router.get("/game_info", getAllGames);
