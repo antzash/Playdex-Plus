@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Header from "../Components/Header";
 import GameList from "../Components/GameList";
 import gameData from "../assets/gameData.json";
+import Sidebar from "../Components/Sidebar";
 
 function Home() {
   // const [games, setGames] = useState([]);
@@ -33,18 +34,25 @@ function Home() {
   }
 
   return (
-    <div>
-      <Header
-        searchTerm={searchTerm}
-        handleSearchInput={handleSearchInput}
-        handleSearch={handleSearch}
-      />
-      <div className="text-right w-3/4 mt-10">
-        <GameList
+    <div className="flex flex-col">
+      <div className="w-full">
+        <Header
           searchTerm={searchTerm}
           handleSearchInput={handleSearchInput}
           handleSearch={handleSearch}
         />
+      </div>
+      <div className="flex w-full">
+        <div className="w-3/4">
+          <GameList
+            searchTerm={searchTerm}
+            handleSearchInput={handleSearchInput}
+            handleSearch={handleSearch}
+          />
+        </div>
+        {/* <div className="w-1/4 shadow-lg text-right p-10">
+          <Sidebar />
+        </div> */}
       </div>
     </div>
   );
