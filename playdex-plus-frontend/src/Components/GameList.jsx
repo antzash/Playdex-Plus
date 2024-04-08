@@ -1,13 +1,13 @@
 // GameList.jsx
 import React, { useState, useEffect } from "react";
 import GameCard from "./GameCard";
-import gameData from "../assets/gameData.json";
 
 function GameList({ searchTerm }) {
   const [selectedGenre, setSelectedGenre] = useState("All"); // State for selected genre
   const [selectedPlatform, setSelectedPlatform] = useState("All"); // State for selected platform
   const [gamesToDisplay, setGamesToDisplay] = useState([]);
   const [sortOption, setSortOption] = useState("default"); // Default sort option
+  const [gameData, setGameData] = useState([]);
 
   // Function to handle genre selection
   const handleGenreChange = (event) => {
@@ -38,34 +38,39 @@ function GameList({ searchTerm }) {
   };
 
   useEffect(() => {
-    // Load all games when the component mounts or when the genre, platform, or searchTerm changes
-    let games = gameData;
-    if (selectedGenre !== "All") {
-      games = games.filter((game) =>
-        game.genres.some((genre) => genre.name === selectedGenre)
-      );
-    }
-    if (selectedPlatform !== "All") {
-      games = games.filter((game) =>
-        game.parent_platforms.some(
-          (platform) => platform.platform.name === selectedPlatform
-        )
-      );
-    }
-    if (searchTerm) {
-      games = gameData.filter(
-        (game) =>
-          game.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          game.tags.some((tag) =>
-            tag.name.toLowerCase().includes(searchTerm.toLowerCase())
-          )
-      );
-    }
-    // Apply sorting if not "default"
-    if (sortOption !== "default") {
-      games = sortGames(games);
-    }
-    setGamesToDisplay(games);
+    // Fetch all games when the component mounts or when the genre, platform, or searchTerm changes
+    fetch("http://localhost:5001/games/game_info")
+      .then((response) => response.json())
+      .then((data) => {
+        let games = data;
+        if (selectedGenre !== "All") {
+          games = games.filter((game) =>
+            game.genres.some((genre) => genre.name === selectedGenre)
+          );
+        }
+        if (selectedPlatform !== "All") {
+          games = games.filter((game) =>
+            game.parent_platforms.some(
+              (platform) => platform.platform.name === selectedPlatform
+            )
+          );
+        }
+        if (searchTerm) {
+          games = games.filter(
+            (game) =>
+              game.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+              game.tags.some((tag) =>
+                tag.name.toLowerCase().includes(searchTerm.toLowerCase())
+              )
+          );
+        }
+        // Apply sorting if not "default"
+        if (sortOption !== "default") {
+          games = sortGames(games);
+        }
+        setGamesToDisplay(games);
+      })
+      .catch((error) => console.error("Error fetching games:", error));
   }, [searchTerm, selectedGenre, selectedPlatform, sortOption]);
 
   return (
