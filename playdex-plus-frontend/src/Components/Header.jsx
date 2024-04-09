@@ -33,7 +33,7 @@ function Header({ searchTerm, handleSearchInput, handleSearch }) {
           <IoHeart className="text-violet-800 text-[40px] p-1 rounded-full transition-transform duration-300 ease-in-out transform hover:scale-110 cursor-pointer" />
         </Link>
         {/* Display the username next to the heart icon */}
-        <span className="text-violet-800 text-[20px] ml-2">
+        <span className="text-violet-800 text-[20px] font-bold ml-2">
           Welcome, {username}
         </span>
       </div>
