@@ -1,11 +1,24 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 function Sidebar() {
-  const users = [
-    { username: "Anthony" },
-    { username: "Lek Ee" },
-    { username: "Eremus" },
-  ];
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await fetch("http://localhost:5001/auth/users");
+        if (!response.ok) {
+          throw new Error("Failed to fetch users");
+        }
+        const usersData = await response.json();
+        setUsers(usersData);
+      } catch (error) {
+        console.error("Error fetching users:", error);
+      }
+    };
+
+    fetchUsers();
+  }, []);
 
   return (
     <div>
