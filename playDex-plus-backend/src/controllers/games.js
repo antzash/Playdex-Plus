@@ -92,11 +92,12 @@ const getFavourites = async (req, res) => {
 
 const updateGame = async (req, res) => {
   try {
-    const updateGame = {};
-    if ("id" in req.body) updateGame.id = req.body.id;
-    //subjected to frontend
-
-    await Favourites.findByIdAndUpdate(req.params.id, updateGame);
+    // Use the $set operator to update only the specified fields
+    await Favourites.findByIdAndUpdate(
+      req.params.id,
+      { $set: req.body },
+      { new: true } // This option returns the updated document
+    );
     res.json({ status: "ok", msg: "game updated" });
   } catch (error) {
     console.error(error.message);

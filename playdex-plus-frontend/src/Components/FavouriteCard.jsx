@@ -46,6 +46,33 @@ const FavouriteCard = ({ game, onRemove }) => {
     }
   };
 
+  const handleStatusChange = async (event) => {
+    const newStatus = event.target.value;
+    setGameStatus(newStatus);
+
+    try {
+      const response = await fetch(
+        `http://localhost:5001/games/favourites/${game._id}`,
+        {
+          method: "PATCH", // Change this to PATCH
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${accessToken}`, // Include the accessToken in the Authorization header
+          },
+          body: JSON.stringify({ status: newStatus }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to update game status");
+      }
+
+      console.log("Game status updated successfully");
+    } catch (error) {
+      console.error("Error updating game status:", error);
+    }
+  };
+
   useEffect(() => {
     let intervalId;
     if (isHovered) {
@@ -87,6 +114,17 @@ const FavouriteCard = ({ game, onRemove }) => {
             .map((platform) => platform.platform.name)
             .join(", ")}
         </p>
+        <select
+          value={gameStatus}
+          onChange={handleStatusChange}
+          className="border border-gray-300 rounded-md p-2 mt-2"
+        >
+          {gameStatusOptions.map((status, index) => (
+            <option key={index} value={status}>
+              {status}
+            </option>
+          ))}
+        </select>
       </div>
       <div className="absolute bottom-4 right-4">
         <button
