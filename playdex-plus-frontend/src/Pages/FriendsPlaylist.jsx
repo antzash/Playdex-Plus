@@ -1,6 +1,7 @@
+// FriendsPlaylist.jsx
 import React, { useState, useEffect, useContext } from "react";
 import Header from "../Components/Header";
-import FavouriteCard from "../Components/FavouriteCard";
+import FriendCard from "../Components/FriendCard"; // Import FriendCard
 import { useParams } from "react-router-dom";
 import UserContext from "../context/user";
 
@@ -41,7 +42,7 @@ function FriendsPlaylist() {
       </h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {favourites.map((game) => (
-          <FavouriteCard key={game.id} game={game} />
+          <FriendCard key={game.id} game={game} />
         ))}
       </div>
     </div>
