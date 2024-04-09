@@ -105,7 +105,7 @@ const updateGame = async (req, res) => {
 
 const removeGame = async (req, res) => {
   try {
-    await Favourites.findByIdAndDelete(req.body.id);
+    await Favourites.findByIdAndDelete(req.params.id);
     res.json({ status: "ok", msg: "game deleted" });
   } catch (error) {
     console.error(error.message);
