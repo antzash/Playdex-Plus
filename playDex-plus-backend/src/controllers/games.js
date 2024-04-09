@@ -71,7 +71,8 @@ const getGameByUserPlaylist = async (req, res) => {
       .select("platforms")
       .select("short_screenshots")
       .select("genres")
-      .select("parent_platforms");
+      .select("parent_platforms")
+      .select("status");
     res.json(game);
   } catch (error) {
     console.error(error.message);

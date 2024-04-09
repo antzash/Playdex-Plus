@@ -3,6 +3,18 @@ const mongoose = require("mongoose");
 const FavListSchema = new mongoose.Schema(
   {
     playlistName: { type: String },
+    status: {
+      type: String,
+      enum: [
+        "Not Bought",
+        "Bought",
+        "Played",
+        "Repeat",
+        "Wait For Sale",
+        "Not My Thing",
+      ],
+      default: "Not Bought",
+    },
     username: { type: String },
     id: { type: Number },
     slug: { type: String },
