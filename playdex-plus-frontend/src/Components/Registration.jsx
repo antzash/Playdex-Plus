@@ -8,6 +8,7 @@ const Registration = (props) => {
   const [password, setPassword] = useState("");
 
 
+
   const registerUser = async () => {
     const res = await fetchData("/auth/register", "PUT", {
       username,
@@ -17,18 +18,15 @@ const Registration = (props) => {
     if (res.ok) {
       setUsername("");
       setPassword("");
-      alert("User successfully registered!");
+      alert("User successfully registered! Try logging in now.");
+      props.setShowLogin(true)
     } else {
       console.log(res.data);
-      alert("Registration failed." +res.data);
+      alert("Registration failed. Errors encountered: \n" +res.data);
 
     }
   };
 
-  const handleRegister = async () => {
-    await registerUser();
-    props.setShowLogin(true); 
-  };
 
   return (
     <>
@@ -68,7 +66,7 @@ const Registration = (props) => {
 
       <div className="row">
         <div className="col-md-4"></div>
-        <button className="col-md-4" type="submit" onClick={handleRegister}>
+        <button className="col-md-4" type="submit" onClick={registerUser}>
           register
         </button>
         <div className="col-md-4"></div>
