@@ -36,7 +36,7 @@ function Sidebar() {
           <li
             key={index}
             className="mb-2 cursor-pointer hover:bg-violet-200 p-2 rounded-full"
-            onClick={() => handleUserClick(user.username)} // Add this line
+            onClick={() => handleUserClick(user.username)}
           >
             <a href="#" className="text-[20px]">
               {user.username}
@@ -47,4 +47,5 @@ function Sidebar() {
     </div>
   );
 }
+
 export default Sidebar;

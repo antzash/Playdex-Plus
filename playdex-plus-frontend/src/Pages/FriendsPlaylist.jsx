@@ -1,4 +1,3 @@
-// src/Pages/FriendsPlaylist.jsx
 import React, { useState, useEffect, useContext } from "react";
 import Header from "../Components/Header";
 import FavouriteCard from "../Components/FavouriteCard";
@@ -10,22 +9,17 @@ function FriendsPlaylist() {
   const [favourites, setFavourites] = useState([]);
   const { accessToken } = useContext(UserContext);
 
-  // FriendsPlaylist.jsx
-
   useEffect(() => {
     const fetchFavourites = async () => {
       try {
-        const response = await fetch(
-          `http://localhost:5001/games/favourites`, // Adjust the URL if necessary
-          {
-            method: "POST", // Change to POST or another method that supports sending a body
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${accessToken}`,
-            },
-            body: JSON.stringify({ username: "Geralt" }), // Include the username in the request body
-          }
-        );
+        const response = await fetch(`http://localhost:5001/games/favourites`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
+          },
+          body: JSON.stringify({ username: username }), // Use the extracted username
+        });
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
