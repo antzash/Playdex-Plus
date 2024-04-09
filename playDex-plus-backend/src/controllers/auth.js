@@ -1,4 +1,4 @@
-const AuthModel = require("../models/Auth");
+const AuthModel = require("../Models/Auth");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { v4: uuidv4 } = require("uuid");
@@ -24,12 +24,10 @@ const register = async (req, res) => {
     //1. check duplicates:
     const auth = await AuthModel.findOne({ username: req.body.username });
     if (auth) {
-      return res
-        .status(400)
-        .json({
-          status: "error",
-          msg: "username taken lol pls choose another",
-        });
+      return res.status(400).json({
+        status: "error",
+        msg: "username taken lol pls choose another",
+      });
     }
     //2. hash password:
     const hash = await bcrypt.hash(req.body.password, 12);
