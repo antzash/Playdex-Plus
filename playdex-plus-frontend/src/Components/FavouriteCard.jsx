@@ -114,7 +114,7 @@ const FavouriteCard = ({ game, onRemove }) => {
             : game.background_image
         }
         alt={game.name}
-        className="w-full h-50 object-cover rounded-md"
+        className="w-full h-full object-cover rounded-md"
       />
       <div className="mt-2 text-left">
         <h2 className="text-[20px] text-violet-800 font-semibold">
