@@ -11,19 +11,11 @@ const getAllGames = async (req, res) => {
   }
 };
 
-const getGameById = async (req, res) => {
-  try {
-    const game = await Games.find({ id: req.body.id });
-    res.json(game);
-  } catch (error) {
-    console.error(error.message);
-    res.status(400).json({ status: "error", msg: "error getting game" });
-  }
-};
-
 const addFavourites = async (req, res) => {
   try {
     const newGame = {
+      username: req.body.username,
+      playlistName: req.body.playlistName,
       id: req.body.id,
       slug: req.body.slug,
       name: req.body.name,
@@ -67,6 +59,26 @@ const addFavourites = async (req, res) => {
   }
 };
 
+const getGameByUserPlaylist = async (req, res) => {
+  try {
+    const game = await Favourites.find({
+      username: req.body.username,
+      playlistName: req.body.playlistName,
+    })
+      .select("id")
+      .select("slug")
+      .select("name")
+      .select("released")
+      .select("background_image")
+      .select("platforms")
+      .select("short_screenshots");
+    res.json(game);
+  } catch (error) {
+    console.error(error.message);
+    res.status(400).json({ status: "error", msg: "error getting game" });
+  }
+};
+
 const getFavourites = async (req, res) => {
   try {
     const favourites = await Favourites.find();
@@ -103,8 +115,8 @@ const removeGame = async (req, res) => {
 
 module.exports = {
   getAllGames,
-  getGameById,
   addFavourites,
+  getGameByUserPlaylist,
   getFavourites,
   updateGame,
   removeGame,
