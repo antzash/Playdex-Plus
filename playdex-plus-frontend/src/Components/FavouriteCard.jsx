@@ -7,7 +7,7 @@ const FavouriteCard = ({ game, onRemove }) => {
   const { accessToken } = useContext(UserContext); // Access the accessToken from UserContext
   const [isHovered, setIsHovered] = useState(false);
   const [currentScreenshotIndex, setCurrentScreenshotIndex] = useState(0);
-  const [gameStatus, setGameStatus] = useState("Not Bought");
+  const [gameStatus, setGameStatus] = useState(game.status);
 
   const gameStatusOptions = [
     "Not Bought",
