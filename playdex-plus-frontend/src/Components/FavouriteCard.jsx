@@ -58,31 +58,6 @@ const FavouriteCard = ({ game, onRemove }) => {
     return () => clearInterval(intervalId); // Cleanup on component unmount or hover end
   }, [isHovered, game.short_screenshots.length]);
 
-  const updateGameStatus = async (gameId, status) => {
-    try {
-      const response = await fetch(`/api/games/${gameId}/status`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ status }),
-      });
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      const data = await response.json();
-      console.log(data);
-    } catch (error) {
-      console.error("There was a problem with the fetch operation:", error);
-    }
-  };
-
-  useEffect(() => {
-    if (game.id) {
-      updateGameStatus(game.id, gameStatus);
-    }
-  }, [gameStatus]);
-
   return (
     <div
       className={`p-5 relative rounded-lg group hover:scale-110 transition-all duration-300 ease-in-out cursor-pointer flex flex-col justify-between h-full shadow-xl hover:shadow-lg hover:text-white ${
@@ -112,17 +87,6 @@ const FavouriteCard = ({ game, onRemove }) => {
             .map((platform) => platform.platform.name)
             .join(", ")}
         </p>
-        <select
-          value={gameStatus}
-          onChange={(e) => setGameStatus(e.target.value)}
-          className="bg-violet-800 text-white hover:bg-whitesmoke hover:text-violet rounded-full font-bold py-2 px-2 mt-4"
-        >
-          {gameStatusOptions.map((status) => (
-            <option key={status} value={status}>
-              {status}
-            </option>
-          ))}
-        </select>
       </div>
       <div className="absolute bottom-4 right-4">
         <button
