@@ -15,7 +15,7 @@ router.get("/game_info", getAllGames);
 router.post("/game_info", getGameById);
 router.put("/favourites", addFavourites);
 router.get("/favourites", getFavourites);
-router.patch("/appointments/:id", updateGame);
-router.delete("/appointments/:id", removeGame);
+router.patch("/favourites/:id", updateGame);
+router.delete("/favourites/:id", removeGame);
 
 module.exports = router;

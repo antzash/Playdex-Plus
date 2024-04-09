@@ -13,7 +13,7 @@ const getAllGames = async (req, res) => {
 
 const getGameById = async (req, res) => {
   try {
-    const game = await Games.find({ id: req.body.id });
+    const game = await Games.findOne({ id: req.body.id });
     res.json(game);
   } catch (error) {
     console.error(error.message);
