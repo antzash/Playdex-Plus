@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Sidebar() {
   const [users, setUsers] = useState([]);
+  const navigate = useNavigate(); // Hook to navigate between pages
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -20,6 +22,10 @@ function Sidebar() {
     fetchUsers();
   }, []);
 
+  const handleUserClick = (username) => {
+    navigate(`/friends-playlist/${username}`); // Navigate to the FriendsPlaylist page with the selected username
+  };
+
   return (
     <div>
       <h2 className="text-[30px] text-violet-800 font-bold mb-4">
@@ -30,6 +36,7 @@ function Sidebar() {
           <li
             key={index}
             className="mb-2 cursor-pointer hover:bg-violet-200 p-2 rounded-full"
+            onClick={() => handleUserClick(user.username)} // Add this line
           >
             <a href="#" className="text-[20px]">
               {user.username}
@@ -40,5 +47,4 @@ function Sidebar() {
     </div>
   );
 }
-
 export default Sidebar;

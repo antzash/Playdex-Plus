@@ -8,6 +8,7 @@ import UserContext from "./context/user";
 import { useState } from "react";
 import Login from "./Components/Login";
 import Registration from "./Components/Registration";
+import FriendsPlaylist from "./Pages/FriendsPlaylist";
 
 function App() {
   const [accessToken, setAccessToken] = useState("");
@@ -24,6 +25,10 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/playlist" element={<Playlist />} />
+              <Route
+                path="/friends-playlist/:username"
+                element={<FriendsPlaylist />}
+              />{" "}
             </Routes>
           </Router>
         )}
