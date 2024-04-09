@@ -1,8 +1,14 @@
 // GameCard.jsx
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { FaPlus } from "react-icons/fa"; // Import the plus icon
+import { jwtDecode } from "jwt-decode";
+import UserContext from "../context/user";
 
 const GameCard = ({ game, playlists, onAddToPlaylist }) => {
+  const { accessToken } = useContext(UserContext);
+  const decoded = jwtDecode(accessToken);
+  const username = decoded.username;
+
   // Assuming platformStr is a string that contains the platforms
   const platformStr = game.parent_platforms
     .map((platform) => platform.platform.name)
@@ -38,14 +44,22 @@ const GameCard = ({ game, playlists, onAddToPlaylist }) => {
     return () => clearInterval(intervalId); // Cleanup on component unmount or hover end
   }, [isHovered, game.short_screenshots]);
 
-  // Function to handle adding a game to the favourites
   const handleAddToFavourites = async () => {
     try {
-      // Log the game data that is being added
-      console.log("Adding game to favourites:", game);
+      const response = await fetch("http://localhost:5001/games/favourites", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ ...game, username }), // Include the username in the body
+      });
 
-      const response = await addFavourites(game);
-      console.log("Success:", response);
+      if (!response.ok) {
+        throw new Error("Failed to add game to favourites");
+      }
+
+      const data = await response.json();
+      console.log("Success:", data);
     } catch (error) {
       console.error("Error adding game to favourites:", error);
     }

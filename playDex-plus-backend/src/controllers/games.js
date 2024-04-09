@@ -15,7 +15,6 @@ const addFavourites = async (req, res) => {
   try {
     const newGame = {
       username: req.body.username,
-      playlistName: req.body.playlistName,
       id: req.body.id,
       slug: req.body.slug,
       name: req.body.name,
@@ -63,7 +62,6 @@ const getGameByUserPlaylist = async (req, res) => {
   try {
     const game = await Favourites.find({
       username: req.body.username,
-      playlistName: req.body.playlistName,
     })
       .select("id")
       .select("slug")
