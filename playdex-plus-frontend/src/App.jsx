@@ -9,37 +9,40 @@ import { useState } from "react";
 import Login from "./Components/Login";
 import Registration from "./Components/Registration";
 
-
 function App() {
   const [accessToken, setAccessToken] = useState("");
   const [role, setRole] = useState("");
-  const [showLogin, setShowLogin] = useState(true); // toggle to regisration page
-
-
-
+  const [showLogin, setShowLogin] = useState(true); // toggle to registration page
 
   return (
-    <>
-    <UserContext.Provider
+    <Router>
+      <UserContext.Provider
         value={{ accessToken, setAccessToken, role, setRole }}
       >
-    {accessToken.length > 0 && <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/playlist" element={<Playlist />} />
-      </Routes>
-    </Router>}
-    {accessToken.length === 0 && showLogin && (
-          <Login setShowLogin={setShowLogin}></Login>
-        )}
-        {accessToken.length === 0 && !showLogin && (
-          <Registration setShowLogin={setShowLogin}></Registration>
-        )}
-
-
-    </UserContext.Provider>
-    </>
-    );
+        <Routes>
+          <Route
+            path="/"
+            element={
+              accessToken.length > 0 ? (
+                <Home />
+              ) : (
+                <Login setShowLogin={setShowLogin} />
+              )
+            }
+          />
+          <Route path="/playlist" element={<Playlist />} />
+          <Route
+            path="/login"
+            element={<Login setShowLogin={setShowLogin} />}
+          />
+          <Route
+            path="/register"
+            element={<Registration setShowLogin={setShowLogin} />}
+          />
+        </Routes>
+      </UserContext.Provider>
+    </Router>
+  );
 }
 
 export default App;

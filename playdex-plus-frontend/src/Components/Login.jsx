@@ -1,12 +1,15 @@
+// Login.jsx
 import React from "react";
 import { useContext } from "react";
 import UserContext from "../context/user";
 import { useState } from "react";
 import useFetch from "../hooks/useFetch";
 import { jwtDecode } from "jwt-decode";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 
 const Login = (props) => {
   const fetchData = useFetch();
+  const navigate = useNavigate(); // Initialize useNavigate
 
   const userCtx = useContext(UserContext);
   const [username, setUsername] = useState("");
@@ -19,6 +22,7 @@ const Login = (props) => {
       userCtx.setAccessToken(res.data.access);
       const decoded = jwtDecode(res.data.access);
       userCtx.setRole(decoded.role);
+      navigate("/"); // Navigate to the Home component
     } else {
       alert(JSON.stringify(res.data));
     }
