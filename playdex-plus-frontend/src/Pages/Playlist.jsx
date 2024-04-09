@@ -35,6 +35,10 @@ function Playlist() {
     fetchFavourites();
   }, [username]); // Add username as a dependency to refetch when it changes
 
+  const removeGameFromList = (gameId) => {
+    setFavourites(favourites.filter((game) => game.id !== gameId));
+  };
+
   // Function to decode JWT and get the username
   const getUsernameFromToken = () => {
     const token = localStorage.getItem("token");
@@ -61,7 +65,11 @@ function Playlist() {
       </h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {favourites.map((game) => (
-          <FavouriteCard key={game.id} game={game} />
+          <FavouriteCard
+            key={game.id}
+            game={game}
+            onRemove={removeGameFromList}
+          />
         ))}
       </div>
     </div>

@@ -3,7 +3,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { FaMinus } from "react-icons/fa";
 import UserContext from "../context/user"; // Import UserContext
 
-const FavouriteCard = ({ game }) => {
+const FavouriteCard = ({ game, onRemove }) => {
   const { accessToken } = useContext(UserContext); // Access the accessToken from UserContext
   const [isHovered, setIsHovered] = useState(false);
   const [currentScreenshotIndex, setCurrentScreenshotIndex] = useState(0);
@@ -38,6 +38,8 @@ const FavouriteCard = ({ game }) => {
         throw new Error("Failed to remove game from favourites");
       }
 
+      // Call the onRemove function passed from the Playlist component
+      onRemove(game.id);
       console.log("Game removed successfully");
     } catch (error) {
       console.error("Error removing game from favourites:", error);
