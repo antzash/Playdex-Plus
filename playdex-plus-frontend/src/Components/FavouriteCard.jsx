@@ -1,8 +1,10 @@
 // src/Components/FavouriteCard.jsx
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { FaMinus } from "react-icons/fa";
+import UserContext from "../context/user"; // Import UserContext
 
 const FavouriteCard = ({ game }) => {
+  const { accessToken } = useContext(UserContext); // Access the accessToken from UserContext
   const [isHovered, setIsHovered] = useState(false);
   const [currentScreenshotIndex, setCurrentScreenshotIndex] = useState(0);
   const [gameStatus, setGameStatus] = useState("Not Bought");
@@ -18,6 +20,29 @@ const FavouriteCard = ({ game }) => {
 
   const handleMouseEnter = () => setIsHovered(true);
   const handleMouseLeave = () => setIsHovered(false);
+
+  const handleRemoveGame = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:5001/games/favourites/${game._id}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${accessToken}`, // Include the accessToken in the Authorization header
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to remove game from favourites");
+      }
+
+      console.log("Game removed successfully");
+    } catch (error) {
+      console.error("Error removing game from favourites:", error);
+    }
+  };
 
   useEffect(() => {
     let intervalId;
@@ -98,7 +123,10 @@ const FavouriteCard = ({ game }) => {
         </select>
       </div>
       <div className="absolute bottom-4 right-4">
-        <button className="bg-whitesmoke hover:bg-violet-800 hover:text-white text-violet-800 rounded-full font-bold py-1 px-3 rounded">
+        <button
+          className="bg-whitesmoke hover:bg-violet-800 hover:text-white text-violet-800 rounded-full font-bold py-1 px-3 rounded"
+          onClick={handleRemoveGame}
+        >
           <FaMinus />
         </button>
       </div>
