@@ -1,5 +1,6 @@
 const useFetch = () => {
   const fetchData = async (endpoint, method, body, token) => {
+    console.log(import.meta.env.VITE_SERVER)
     const res = await fetch(import.meta.env.VITE_SERVER + endpoint, {
       method,
       headers: {
