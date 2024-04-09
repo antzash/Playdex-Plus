@@ -33,10 +33,23 @@ const GameCard = ({ game, playlists, onAddToPlaylist }) => {
         setCurrentScreenshotIndex(
           (prevIndex) => (prevIndex + 1) % game.short_screenshots.length
         );
-      }, 800); //
+      }, 800);
     }
     return () => clearInterval(intervalId); // Cleanup on component unmount or hover end
   }, [isHovered, game.short_screenshots]);
+
+  // Function to handle adding a game to the favourites
+  const handleAddToFavourites = async () => {
+    try {
+      // Log the game data that is being added
+      console.log("Adding game to favourites:", game);
+
+      const response = await addFavourites(game);
+      console.log("Success:", response);
+    } catch (error) {
+      console.error("Error adding game to favourites:", error);
+    }
+  };
 
   return (
     <div
@@ -69,12 +82,32 @@ const GameCard = ({ game, playlists, onAddToPlaylist }) => {
         {truncatedPlatformStr}
       </div>
       <div className="absolute bottom-0 right-0 m-5">
-        <button className=" hover:bg-violet-500 text-violet-800 py-2 px-4 rounded-full flex items-center justify-center">
+        <button
+          className="hover:bg-violet-500 text-violet-800 py-2 px-4 rounded-full flex items-center justify-center"
+          onClick={handleAddToFavourites} // Add this line
+        >
           <FaPlus />
         </button>
       </div>
     </div>
   );
 };
+
+// Function to add a game to the favourites
+async function addFavourites(game) {
+  const response = await fetch("http://localhost:5001/games/favourites", {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(game),
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to add game to favourites");
+  }
+
+  return await response.json();
+}
 
 export default GameCard;
