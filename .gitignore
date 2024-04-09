@@ -400,3 +400,5 @@ FodyWeavers.xsd
 .env
 
 .DS_Store
+playDex-plus-backend/package-lock.json
+playDex-plus-backend/package-lock.json
