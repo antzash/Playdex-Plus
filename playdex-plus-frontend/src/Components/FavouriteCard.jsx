@@ -9,6 +9,20 @@ const FavouriteCard = ({ game, onRemove }) => {
   const [currentScreenshotIndex, setCurrentScreenshotIndex] = useState(0);
   const [gameStatus, setGameStatus] = useState(game.status);
 
+  // Assuming platformStr is a string that contains the platforms
+  const platformStr = game.parent_platforms
+    .map((platform) => platform.platform.name)
+    .join(", ");
+
+  // Truncate the platformStr if it's longer than 30 characters
+  const truncatedPlatformStr =
+    platformStr.length > 30
+      ? `${platformStr.substring(0, 30)}...`
+      : platformStr;
+
+  // Map over the genres array to create a string of genre names
+  const genreStr = game.genres.map((genre) => genre.name).join(", ");
+
   const gameStatusOptions = [
     "Not Bought",
     "Bought",
@@ -109,11 +123,9 @@ const FavouriteCard = ({ game, onRemove }) => {
         <p className="text-[15px] font-semibold mt-2 text-black">
           {game.genres.map((genre) => genre.name).join(", ")}
         </p>
-        <p className="text-[13px] font-light mt-2 text-violet-800">
-          {game.parent_platforms
-            .map((platform) => platform.platform.name)
-            .join(", ")}
-        </p>
+        <div className="text-[12px] text-left text-violet-800 font-light mt-2">
+          {truncatedPlatformStr}
+        </div>
         <select
           value={gameStatus}
           onChange={handleStatusChange}

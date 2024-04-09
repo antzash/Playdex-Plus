@@ -7,6 +7,20 @@ const FriendCard = ({ game }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [currentScreenshotIndex, setCurrentScreenshotIndex] = useState(0);
 
+  // Assuming platformStr is a string that contains the platforms
+  const platformStr = game.parent_platforms
+    .map((platform) => platform.platform.name)
+    .join(", ");
+
+  // Truncate the platformStr if it's longer than 30 characters
+  const truncatedPlatformStr =
+    platformStr.length > 30
+      ? `${platformStr.substring(0, 30)}...`
+      : platformStr;
+
+  // Map over the genres array to create a string of genre names
+  const genreStr = game.genres.map((genre) => genre.name).join(", ");
+
   // Effect to change screenshot on hover
   useEffect(() => {
     let intervalId;
@@ -43,9 +57,22 @@ const FriendCard = ({ game }) => {
           className="lazy h-[200px] w-full rounded-xl object-cover"
           loading="lazy"
         />
-        <h2 className="text-[16px] mt-2 text-left text-violet-800 font-bold">
-          {game.name}
-        </h2>
+        <div className="mt-2 text-left">
+          <h2 className="text-[20px] text-violet-800 font-semibold">
+            {game.name}
+          </h2>
+          <p className="text-[15px] font-semibold mt-2 text-black">
+            {game.genres.map((genre) => genre.name).join(", ")}
+          </p>
+          <div className="text-[12px] text-left text-violet-800 font-light mt-2">
+            {truncatedPlatformStr}
+          </div>
+          <div className="mt-2 text-center">
+            <div className="inline-block rounded-full text-violet-800 mt-5 ">
+              <p className="text-[20px] font-bold text-center">{game.status}</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
