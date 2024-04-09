@@ -6,6 +6,8 @@ const Registration = (props) => {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
+
 
 
   const registerUser = async () => {
@@ -17,11 +19,19 @@ const Registration = (props) => {
     if (res.ok) {
       setUsername("");
       setPassword("");
+      setMessage("User successfully registered!");
     } else {
       console.log(res.data);
+      setMessage("Registration failed.");
+
     }
   };
 
+  const handleRegister = async () => {
+    await registerUser();
+    alert(message)
+    props.setShowLogin(true); 
+  };
 
   return (
     <>
@@ -61,7 +71,7 @@ const Registration = (props) => {
 
       <div className="row">
         <div className="col-md-4"></div>
-        <button className="col-md-4" type="submit" onClick={registerUser}>
+        <button className="col-md-4" type="submit" onClick={handleRegister}>
           register
         </button>
         <div className="col-md-4"></div>
