@@ -6,8 +6,6 @@ const Registration = (props) => {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [message, setMessage] = useState("");
-
 
 
   const registerUser = async () => {
@@ -19,17 +17,16 @@ const Registration = (props) => {
     if (res.ok) {
       setUsername("");
       setPassword("");
-      setMessage("User successfully registered!");
+      alert("User successfully registered!");
     } else {
       console.log(res.data);
-      setMessage("Registration failed.");
+      alert("Registration failed." +res.data);
 
     }
   };
 
   const handleRegister = async () => {
     await registerUser();
-    alert(message)
     props.setShowLogin(true); 
   };
 
