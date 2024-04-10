@@ -49,13 +49,13 @@ const login = async (req, res) => {
     //1. get user:
     const auth = await AuthModel.findOne({ username: req.body.username });
     if (!auth) {
-      return res.status(400).json({ status: "error", msg: "Login details are incorrect. Please try again." });
+      return res.status(400).json({ status: "error", msg: "Username is incorrect. Please try again." });
     }
     //2.compare hash:
     const result = await bcrypt.compare(req.body.password, auth.hash);
     if (!result) {
       console.error("username or password error");
-      return res.status(401).json({ status: "error", msg: "login failed" });
+      return res.status(401).json({ status: "error", msg: "Password is incorrect. Please try again" });
     }
     //3. create tokens:
     const claims = {
