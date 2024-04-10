@@ -2,6 +2,7 @@
 import React, { useContext } from "react";
 import { IoHeart } from "react-icons/io5";
 import { SiYoutubegaming } from "react-icons/si";
+import { HiLockClosed } from "react-icons/hi2";
 import { Link } from "react-router-dom";
 import { jwtDecode } from "jwt-decode"; // Make sure to import jwtDecode
 import UserContext from "../context/user"; // Import UserContext
@@ -36,6 +37,9 @@ function Header({ searchTerm, handleSearchInput, handleSearch }) {
         <span className="text-violet-800 text-[20px] font-bold ml-2">
           Welcome, {username}
         </span>
+      </div>
+      <div className="flex items-center">
+          <HiLockClosed className="text-violet-800 text-[40px] p-1 rounded-full transition-transform duration-300 ease-in-out transform hover:scale-110 cursor-pointer" onClick={() => window.location.reload()}/>
       </div>
     </div>
   );
