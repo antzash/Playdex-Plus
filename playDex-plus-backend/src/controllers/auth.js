@@ -15,7 +15,7 @@ const getAllUsers = async (req, res) => {
     res.json(outputArray);
   } catch (error) {
     console.error(error.message);
-    res.status(400).json({ status: "error", msg: "error get users" });
+    res.status(400).json({ status: "error", msg: "error getting users" });
   }
 };
 
@@ -26,7 +26,7 @@ const register = async (req, res) => {
     if (auth) {
       return res.status(400).json({
         status: "error",
-        msg: "username taken lol pls choose another",
+        msg: "This username has already been taken. Please choose another username.",
       });
     }
     //2. hash password:
@@ -37,10 +37,10 @@ const register = async (req, res) => {
       hash,
       role: req.body.role || "user",
     });
-    res.json({ status: "ok", msg: "user created" });
+    res.json({ status: "ok", msg: "User created successfully." });
   } catch (error) {
     console.error(error.message);
-    res.status(400).json({ status: "error", msg: "error register" });
+    res.status(400).json({ status: "error", msg: "error registering" });
   }
 };
 
@@ -49,13 +49,13 @@ const login = async (req, res) => {
     //1. get user:
     const auth = await AuthModel.findOne({ username: req.body.username });
     if (!auth) {
-      return res.status(400).json({ status: "error", msg: "no authorized" });
+      return res.status(400).json({ status: "error", msg: "Username is incorrect. Please try again." });
     }
     //2.compare hash:
     const result = await bcrypt.compare(req.body.password, auth.hash);
     if (!result) {
       console.error("username or password error");
-      return res.status(401).json({ status: "error", msg: "login fail" });
+      return res.status(401).json({ status: "error", msg: "Password is incorrect. Please try again" });
     }
     //3. create tokens:
     const claims = {

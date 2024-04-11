@@ -1,17 +1,17 @@
 const { body } = require("express-validator");
 
 const validateRegistrationData = [
-  body("username", "username is required").not().isEmpty(),
-  body("password", "password is required").not().isEmpty(),
-  body("password", "password min is 6 and max is 50").isLength({
+  body("username", "Invalid Username").not().isEmpty(),
+  body("password", "Invalid Password").not().isEmpty(),
+  body("password", "Password needs to be between 6 and 20 characters.").isLength({
     min: 6,
-    max: 50,
+    max: 20,
   }),
 ];
 
 const validateLoginData = [
-  body("username", "username is required").not().isEmpty(),
-  body("password", "password is required").not().isEmpty(),
+  body("username", "Invalid Username").not().isEmpty(),
+  body("password", "Invalid Password").not().isEmpty(),
 ];
 
 const validateRefreshToken = [
