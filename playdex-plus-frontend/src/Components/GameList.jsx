@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import GameCard from "./GameCard"; // Assuming you have a GameCard component
+import GameCard from "./GameCard";
 
 function GameList({ searchTerm }) {
   const [selectedGenre, setSelectedGenre] = useState("All");

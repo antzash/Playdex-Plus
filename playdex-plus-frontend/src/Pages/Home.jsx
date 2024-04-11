@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import Header from "../Components/Header";
 import GameList from "../Components/GameList";
-import Banner from "../Components/Banner"; // Import the Banner component
+import Banner from "../Components/Banner";
 import gameData from "../assets/gameData.json";
 import Sidebar from "../Components/Sidebar";
 
@@ -16,7 +16,6 @@ function Home() {
 
   function handleSearch(event) {
     if (event.key === "Enter") {
-      // Your existing search logic
     }
   }
 
@@ -26,15 +25,15 @@ function Home() {
     setCurrentGame(gameData[randomIndex]);
   }
 
-  // Set up a timer to change the game every 10 seconds
+  // Set up a timer to change the game every 3 seconds
   useEffect(() => {
     const timer = setInterval(() => {
       selectRandomGame();
-    }, 3000); // 10000 milliseconds = 10 seconds
+    }, 3000); //
 
     // Cleanup function to clear the interval when the component unmounts
     return () => clearInterval(timer);
-  }, []); // Empty dependency array means this effect runs once on mount
+  }, []);
 
   return (
     <div className="flex flex-col">

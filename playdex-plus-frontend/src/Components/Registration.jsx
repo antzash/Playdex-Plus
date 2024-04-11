@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import useFetch from "../hooks/useFetch";
-import logo from "../assets/Images/logo.png"; // Import the logo
+import logo from "../assets/Images/logo.png";
 
 const Registration = (props) => {
   const fetchData = useFetch();

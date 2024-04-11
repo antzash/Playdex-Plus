@@ -7,7 +7,7 @@ const FriendCard = ({ game }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [currentScreenshotIndex, setCurrentScreenshotIndex] = useState(0);
 
-  // Assuming platformStr is a string that contains the platforms
+  // platformStr is a string that contains the platforms
   const platformStr = game.parent_platforms
     .map((platform) => platform.platform.name)
     .join(", ");
@@ -35,7 +35,7 @@ const FriendCard = ({ game }) => {
         );
       }, 800);
     }
-    return () => clearInterval(intervalId); // Cleanup on component unmount or hover end
+    return () => clearInterval(intervalId);
   }, [isHovered, game.short_screenshots]);
 
   return (

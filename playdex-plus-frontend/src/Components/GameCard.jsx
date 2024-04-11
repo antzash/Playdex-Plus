@@ -9,7 +9,7 @@ const GameCard = ({ game, playlists, onAddToPlaylist }) => {
   const decoded = jwtDecode(accessToken);
   const username = decoded.username;
 
-  // Assuming platformStr is a string that contains the platforms
+  // platformStr is a string that contains the platforms
   const platformStr = game.parent_platforms
     .map((platform) => platform.platform.name)
     .join(", ");
@@ -98,7 +98,7 @@ const GameCard = ({ game, playlists, onAddToPlaylist }) => {
       <div className="absolute bottom-0 right-0 m-5">
         <button
           className="hover:bg-violet-500 text-violet-800 py-2 px-4 rounded-full flex items-center justify-center"
-          onClick={handleAddToFavourites} // Add this line
+          onClick={handleAddToFavourites}
         >
           <FaPlus />
         </button>

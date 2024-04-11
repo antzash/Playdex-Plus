@@ -1,15 +1,14 @@
-// src/Components/FavouriteCard.jsx
 import React, { useState, useEffect, useContext } from "react";
 import { FaMinus } from "react-icons/fa";
 import UserContext from "../context/user"; // Import UserContext
 
 const FavouriteCard = ({ game, onRemove }) => {
-  const { accessToken } = useContext(UserContext); // Access the accessToken from UserContext
+  const { accessToken } = useContext(UserContext);
   const [isHovered, setIsHovered] = useState(false);
   const [currentScreenshotIndex, setCurrentScreenshotIndex] = useState(0);
   const [gameStatus, setGameStatus] = useState(game.status);
 
-  // Assuming platformStr is a string that contains the platforms
+  // platformStr is a string that contains the platforms
   const platformStr = game.parent_platforms
     .map((platform) => platform.platform.name)
     .join(", ");
@@ -43,7 +42,7 @@ const FavouriteCard = ({ game, onRemove }) => {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${accessToken}`, // Include the accessToken in the Authorization header
+            Authorization: `Bearer ${accessToken}`,
           },
         }
       );
@@ -52,7 +51,6 @@ const FavouriteCard = ({ game, onRemove }) => {
         throw new Error("Failed to remove game from favourites");
       }
 
-      // Call the onRemove function passed from the Playlist component
       onRemove(game.id);
       console.log("Game removed successfully");
     } catch (error) {
@@ -68,10 +66,10 @@ const FavouriteCard = ({ game, onRemove }) => {
       const response = await fetch(
         `http://localhost:5001/games/favourites/${game._id}`,
         {
-          method: "PATCH", // Change this to PATCH
+          method: "PATCH",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${accessToken}`, // Include the accessToken in the Authorization header
+            Authorization: `Bearer ${accessToken}`,
           },
           body: JSON.stringify({ status: newStatus }),
         }
@@ -94,9 +92,9 @@ const FavouriteCard = ({ game, onRemove }) => {
         setCurrentScreenshotIndex(
           (prevIndex) => (prevIndex + 1) % game.short_screenshots.length
         );
-      }, 800); // Change screenshot every 2 seconds
+      }, 800);
     }
-    return () => clearInterval(intervalId); // Cleanup on component unmount or hover end
+    return () => clearInterval(intervalId);
   }, [isHovered, game.short_screenshots.length]);
 
   return (

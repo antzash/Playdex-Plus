@@ -4,7 +4,7 @@ import UserContext from "../context/user";
 import { useState } from "react";
 import useFetch from "../hooks/useFetch";
 import { jwtDecode } from "jwt-decode";
-import logo from "../assets/Images/logo.png"; // Import the logo
+import logo from "../assets/Images/logo.png";
 
 const Login = (props) => {
   const fetchData = useFetch();

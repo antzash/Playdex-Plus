@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 function Sidebar() {
   const [users, setUsers] = useState([]);
-  const navigate = useNavigate(); // Hook to navigate between pages
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUsers = async () => {
