@@ -8,7 +8,7 @@ Playdex-Plus is an interactive platform designed for gamers to explore, manage, 
 - **User Authentication**: Secure user registration and login system.
 - **Role-Based Access Control**: Different user roles with varying levels of access.
 - **Dynamic Game Data**: Fetches game data from an external API and displays it in a user-friendly format.
-- **Responsive Design**: Optimized for various screen sizes, ensuring a seamless user experience across devices.
+- **User Playlists**: See what your friends are playing and their opinions about their games.
 
 ## Technologies Used
 
@@ -36,15 +36,8 @@ Future enhancements for Playdex-Plus include:
 - **Comments on Friends' Playlists**: Enable users to comment on their friends' playlists, fostering a community around game sharing.
 - **Adding Games Manually**: Provide an option for users to manually add games to their playlists if they are not available in the database.
 
-## Contributing
-
-Contributions are welcome! Please read the [contributing guidelines](CONTRIBUTING.md) before getting started.
-
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+##
 
 ## Acknowledgments
 
-- The game data API for providing the game information.
-- The React and Node.js communities for their extensive resources and support.
+- The game data API from RAWG.io for providing the game information.
