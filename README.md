@@ -5,10 +5,13 @@ Playdex-Plus is an interactive platform designed for gamers to explore, manage, 
 ## Features
 
 - **Game Exploration**: Users can browse through a vast collection of games, view detailed information, and manage their playlists.
+<img src="https://imgur.com/Xh3CKq5.jpeg">
 - **User Authentication**: Secure user registration and login system.
-- **Role-Based Access Control**: Different user roles with varying levels of access.
+<img src="https://imgur.com/agu66q8.jpeg">
 - **Dynamic Game Data**: Fetches game data from an external API and displays it in a user-friendly format.
+<img src="https://imgur.com/rEQ4Ihm.jpeg">
 - **User Playlists**: See what your friends are playing and their opinions about their games.
+<img src="https://imgur.com/XBhydzM.jpeg">
 
 ## Technologies Used
 
@@ -23,6 +26,9 @@ MONGODB_URI
 PORT
 VITE_APP_API_KEY
 VITE_SERVER
+ACCESS_SECRET
+REFRESH_SECRET
+
 
 ### Deployed App
 
